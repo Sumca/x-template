@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*":["src/*"],
+        },
+        "types": ["vite/client"],
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "ignoreDeprecations": "5.0",
+        "suppressImplicitAnyIndexErrors": true,
+        "allowSyntheticDefaultImports":true,
+    },
+    "include": [
+        "src/**/*", 
+        "src/main.d.ts", 
+        "src/types/**/*.d.ts", 
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

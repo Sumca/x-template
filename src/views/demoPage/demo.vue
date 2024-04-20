@@ -1,0 +1,76 @@
+<template>
+  <div>
+    <!-- 表单 -->
+    <div>
+      <x-form
+        title="查询条件"
+        :formItems="formItems"
+        @submit="onSubmit"
+        @reset="onReset"
+      ></x-form>
+    </div>
+    <!-- 表格 -->
+    <div style="margin-top: 10px">
+      <xTable
+        title="数据表格"
+        max-height="300"
+        :columns="columns"
+        :data="tableData"
+      ></xTable>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
+import xForm from '@feature/x-form/index.vue'
+import xSelect from '@feature/x-select/index.vue'
+import xTable from '@feature/x-table/index.vue'
+import { getTableDataApi } from '@/api/common'
+const formItems: itemProp[] = [
+  { type: 'input', label: '名字', prop: 'name', span: 6 },
+  {
+    component: xSelect,
+    label: '性别',
+    prop: 'gender',
+    attrs: {
+      placeholder: '请选择性别',
+      clearable: true,
+      span: 6,
+      options: [
+        { label: '男', value: 'man' },
+        { label: '女', value: 'feman' },
+      ],
+    },
+    linstener: {
+      change(val: any) {
+        console.log('性别: ', val)
+      },
+    },
+  },
+  {
+    type: 'input',
+    label: '地址',
+    prop: 'adress',
+    span: 12,
+    attrs: { type: 'textarea' },
+  },
+  { type: 'input', label: '电话', prop: 'phone', span: 6 },
+]
+// 查询
+let tableData = ref([])
+const onSubmit = async () => {
+  const params = { pagenum: 1, pagesize: 22 }
+  const { data } = (await getTableDataApi(params)) as any
+  tableData.value = data
+}
+//
+const onReset = async () => {}
+
+const columns: columnProp[] = [
+  { label: '姓名', prop: 'name' },
+  { label: '年龄', prop: 'age' },
+  { label: '日期', prop: 'date' },
+  { label: '地址', prop: 'address' },
+]
+</script>

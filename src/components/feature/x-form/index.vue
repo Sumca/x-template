@@ -1,0 +1,80 @@
+<template>
+  <el-card style="max-width: 100%">
+    <template #header v-if="showTitle">
+      <div class="card-header">
+        <div class="title">{{ title }}</div>
+      </div>
+    </template>
+    <el-form :model="form" :label-width="labelWidth || '80px'" v-bind="$attrs">
+      <slot name="before" />
+      <el-row>
+        <template v-for="item in formItems" :key="item.label">
+          <el-col :span="item.span || 6">
+            <el-form-item :label="item.label">
+              <component
+                :is="_getComponent(item)"
+                v-model="form[item.prop]"
+                v-bind="{ ..._getComponentProp(item.type), ...item.attrs }"
+                v-on="{ ...item.linstener }"
+              />
+            </el-form-item>
+          </el-col>
+        </template>
+        <el-col v-if="showButtons" :span="6" class="text-align__right">
+          <el-button @click="onClickQuery" type="primary">查询</el-button>
+          <el-button @click="onClickReset" type="primary">清空</el-button>
+          <!-- <el-button v-if="collapseable" type="text" class="expand-button" @click="handleUpdateValue">
+          <span class="status-text">{{ statusText }} </span>
+          <i :class="isExpand ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" />
+        </el-button> -->
+        </el-col>
+      </el-row>
+    </el-form>
+    <!-- <template #footer>Footer content</template> -->
+  </el-card>
+</template>
+
+<script lang="ts" setup>
+import { getComponent, getComponentProp } from './config/factory'
+
+import { reactive, PropType } from 'vue'
+
+const props = defineProps({
+  formItems: Array as PropType<itemProp[]>,
+  title: String,
+  labelWidth: String,
+  showTitle: {
+    type: Boolean,
+    default: true,
+    comment: '是否展示标题',
+  },
+  showButtons: {
+    type: Boolean,
+    default: true,
+    comment: '是否展示按钮',
+  },
+})
+// do not use same name with ref
+const form = reactive({})
+const _getComponent = (item: itemProp) => {
+  return getComponent(item)
+}
+const _getComponentProp = (type?: string) => {
+  if (type) return getComponentProp(type)
+}
+
+//
+const emit = defineEmits(['submit', 'reset'])
+const onClickQuery = () => {
+  emit('submit')
+}
+const onClickReset = () => {
+  emit('reset')
+}
+</script>
+<style>
+.title {
+  text-align: left;
+  font-weight: 600;
+}
+</style>
