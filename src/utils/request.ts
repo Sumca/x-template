@@ -5,17 +5,24 @@ import router from '@/router';
 import { ElMessage } from 'element-plus'
 import { user } from '@/store/user'
 const baseURL = import.meta.env.VITE_APP_API_BASEURL
+const mockURL = import.meta.env.VITE_APP_API_MOCKURL
+
+const setBaseUrl = (url:string):string =>{
+  return url.startsWith('/mock') ? mockURL : baseURL
+}
 // 创建 Axios 实例
 const requset: AxiosInstance = axios.create({
-  baseURL, // API 地址
+  // baseURL, // API 地址
   timeout: 10000, // 设置请求超时时间
 });
+
 // 请求拦截器
 requset.interceptors.request.use(
   (config: any) => {
     // 在请求发送之前
     const users = user()
     const token = users.getToken()
+    config.baseURL = setBaseUrl(config.url) // 设置baseUrl
     if (token) {
       config.headers = { ...config.headers,Authorization: `Bearer ${token}` }; // 设置请求头部的 token
     } else if( config.url !== '/login') {

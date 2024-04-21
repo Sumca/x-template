@@ -12,10 +12,10 @@ app.use(cors());
 // app.get('/login',(req,res)=>{
 //   res.send(adminJson)
 // })
-app.post('/login',(req,res)=>{
+app.post('/mock/login',(req,res)=>{
   res.send(adminJson)
 })
-app.post('/tableInfo',(req,res)=>{
+app.post('/mock/tableInfo',(req,res)=>{
   res.send(tableJson)
 })
 
