@@ -1,10 +1,6 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <router-view v-slot="{ Component }">
-    <keep-alive :include="['Index', 'Root', 'Home']">
-      <component :is="Component" :key="$route.name" />
-    </keep-alive>
-  </router-view>
+  <!-- keep-alive 的需要layout中处理 -->
+  <router-view></router-view>
 </template>
 
 <script lang="ts" setup name="App">

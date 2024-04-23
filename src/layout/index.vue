@@ -14,12 +14,26 @@
       </el-header>
       <!-- 内容区的主体，用于数据展示 -->
       <el-main class="content">
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
+        <router-view v-slot="{ Component, route }">
+          <keep-alive>
+            <component
+              v-if="route.meta.keepAlive"
+              :is="Component"
+              :key="route.name"
+            />
+          </keep-alive>
+          <component
+            v-if="!route.meta.keepAlive"
+            :is="Component"
+            :key="route.name"
+          />
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="layout">
 // vue3中组件引入后不需要使用conponents注册，可以直接使用
 import Header from '@/layout/header/Header.vue'
 import Menu from '@/layout/menu/Menu.vue'

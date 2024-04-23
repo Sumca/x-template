@@ -11,6 +11,7 @@ const staffRoutes: RouteRecordRaw[] = [
     meta: {
       title: "用户管理",
       icon: "Setting",
+      keepAlive: true,
     },
     children: [
       {
@@ -20,6 +21,7 @@ const staffRoutes: RouteRecordRaw[] = [
         meta: {
           title: "角色管理",
           icon: "Faild",
+          keepAlive: true,
         },
       },
       {
@@ -29,6 +31,7 @@ const staffRoutes: RouteRecordRaw[] = [
         meta: {
           title: "权限管理",
           icon: "Interrupt",
+          keepAlive: true,
         },
       },
     ],
