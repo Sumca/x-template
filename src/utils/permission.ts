@@ -1,6 +1,7 @@
 // permission.ts
 
 import { RouteRecordRaw } from 'vue-router';
+
 import systemRoutes from '@/router/modules/system';
 import staffRoutes from '@/router/modules/staff';
 import demoRoutes from '@/router/modules/demo';
@@ -36,7 +37,7 @@ const userPermissions: string[] = ['admin'];
 export async function filterRoutesByPermission(): Promise<RouteRecordRaw[]> {
   const routes = await fetchRoutesFromBackend();
   const permissions = await fetchUserPermissions();
-  return routes.filter(route => {
+  const result = routes.filter(route => {
     // 这里假设路由的权限信息存储在路由的 meta 属性中
     const requiredPermissions = route.meta?.permissions as string[] | undefined;
     if (requiredPermissions) {
@@ -46,4 +47,5 @@ export async function filterRoutesByPermission(): Promise<RouteRecordRaw[]> {
     return true;
     // return false;
   });
+  return result
 }

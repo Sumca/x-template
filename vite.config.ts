@@ -12,6 +12,9 @@ const getViteEnv = (mode, target) => {
 };
 
  const config = ({mode})=> defineConfig({
+  define: {
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
+  },
   plugins: [
     vue(),
     createHtmlPlugin({

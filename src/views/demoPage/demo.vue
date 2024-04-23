@@ -9,6 +9,11 @@
         @reset="onReset"
       ></x-form>
     </div>
+    <div>
+      <el-button v-permission="'add'">add</el-button>
+      <el-button v-permission="'edit'">edit</el-button>
+      <el-button v-permission="'delete'">delete</el-button>
+    </div>
     <!-- 表格 -->
     <div style="margin-top: 10px">
       <xTable
@@ -27,6 +32,7 @@ import xForm from '@feature/x-form/index.vue'
 import xSelect from '@feature/x-select/index.vue'
 import xTable from '@feature/x-table/index.vue'
 import { getTableDataApi } from '@/api/common'
+import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 const formItems: itemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
@@ -65,7 +71,9 @@ const onSubmit = async () => {
   tableData.value = data
 }
 //
-const onReset = async () => {}
+const onReset = useDebounceFn(async () => {
+  console.log('onReset')
+}, 200)
 
 const columns: columnProp[] = [
   { label: '姓名', prop: 'name' },
