@@ -9,7 +9,7 @@ const systemRoutes: RouteRecordRaw[] = [
     component: Layout,      // 每个路由都需要通过component指定归属的布局组件
     redirect: "/index",
     name: "Root",
-    meta: { title: "首页", icon: "Menu",permissions:['admin'] },
+    meta: { title: "首页", icon: "Menu",keepAlive: true, permissions:['admin'] },
     children: [
       {
         path: "/index",
@@ -19,7 +19,7 @@ const systemRoutes: RouteRecordRaw[] = [
           title: "首页",
           icon: "Home",
           affix: true,
-          noKeepAlive: true,
+          keepAlive: true,
           permissions:['admin']
         },
       },

@@ -3,6 +3,8 @@ import path from 'path'
 
 import { defineConfig, UserConfig,loadEnv } from 'vite'
 import { createHtmlPlugin } from "vite-plugin-html";
+import VueSetuoExtend from 'vite-plugin-vue-setup-extend'
+
 import vue from '@vitejs/plugin-vue'
 
 const srcPath = resolve(__dirname, 'src')
@@ -17,6 +19,7 @@ const getViteEnv = (mode, target) => {
   },
   plugins: [
     vue(),
+    VueSetuoExtend(),
     createHtmlPlugin({
       inject: {
         data: {

@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Demo1">
 import { ref, reactive } from 'vue'
 import xForm from '@feature/x-form/index.vue'
 import xSelect from '@feature/x-select/index.vue'
@@ -81,4 +81,5 @@ const columns: columnProp[] = [
   { label: '日期', prop: 'date' },
   { label: '地址', prop: 'address' },
 ]
+//
 </script>

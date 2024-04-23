@@ -9,17 +9,22 @@ const demoRoutes: RouteRecordRaw[] = [
     component: Layout,
     redirect: "/demo",
     name: "Demo",
-    meta: { title: "DEMO", icon: "Menu",permissions:['admin'] },
+    meta: { 
+      title: "DEMO", 
+      icon: "Menu", 
+      keepAlive: true,
+      permissions:['admin'] 
+    },
     children: [
       {
-        path: "/demo",
-        name: "demo1",
+        path: "/demo1",
+        name: "Demo1",
         component: () => import("@/views/demoPage/demo.vue"),
         meta: {
-          title: "demo1",
+          title: "DEMO1",
           icon: "Home",
           affix: true,
-          noKeepAlive: true,
+          keepAlive: true,
           permissions:['admin']
         },
       },

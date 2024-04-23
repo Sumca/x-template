@@ -25,7 +25,7 @@ requset.interceptors.request.use(
     config.baseURL = setBaseUrl(config.url) // 设置baseUrl
     if (token) {
       config.headers = { ...config.headers,Authorization: `Bearer ${token}` }; // 设置请求头部的 token
-    } else if( config.url !== '/login') {
+    } else if( config.url !== '/mock/login') {
       // 如果没有 token，跳转到登录页面
       ElMessage.error('登陆失效, 请重新登陆.')
       router.push('/login');
