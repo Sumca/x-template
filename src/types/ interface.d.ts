@@ -32,3 +32,9 @@ interface SquareConfig {
   color?: string
   width?: number
 }
+
+interface tagsViewItemProp {
+  name:string,
+  title:string,
+  path:string,
+}
