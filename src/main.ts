@@ -8,6 +8,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+
 import './index.css'
 import '@/style/theme.css'
 
@@ -23,6 +24,7 @@ useAllBtnPermission(app)
 
 app.use(createPinia())
 app.use(router); // 挂载到app上
+
 
 app.use(ElementPlus)
 

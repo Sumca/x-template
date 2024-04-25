@@ -28,6 +28,18 @@ const demoRoutes: RouteRecordRaw[] = [
           permissions:['admin']
         },
       },
+      {
+        path: "/chat",
+        name: "Chat",
+        component: () => import("@/views/demoPage/chat.vue"),
+        meta: {
+          title: "图表",
+          icon: "Home",
+          affix: true,
+          keepAlive: true,
+          permissions:['admin']
+        },
+      },
     ],
   },
 ];
