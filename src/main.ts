@@ -9,6 +9,7 @@ import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import './index.css'
+import '@/style/theme.css'
 
 import { useAllBtnPermission } from './directives'
 

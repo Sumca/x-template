@@ -5,6 +5,7 @@
       <TagView />
     </div>
     <div class="avatar-container">
+      <ThemeControl />
       <Avatar />
     </div>
   </div>
@@ -14,6 +15,7 @@
 import BreadCrumb from './BreadCrumb.vue'
 import TagView from './TagView.vue'
 import Avatar from './Avatar.vue'
+import ThemeControl from './ThemeControl.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -26,7 +28,6 @@ import Avatar from './Avatar.vue'
   }
   .avatar-container {
     display: flex;
-    justify-content: center;
     align-items: center;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-card style="max-width: 100%">
+  <el-card style="max-width: 100%" class="x-form-crad">
     <template #header v-if="showTitle">
       <div class="card-header">
         <div class="title">{{ title }}</div>
@@ -72,7 +72,7 @@ const onClickReset = () => {
   emit('reset')
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .title {
   text-align: left;
   font-weight: 600;

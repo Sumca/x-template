@@ -49,15 +49,15 @@ const toogleCollapse = () => {
 .container {
   height: 100%;
   .aside {
-    background-color: #fff;
+    background-color: var(--theme-drak-background-color);
     transition: width 0.5s;
   }
   .header {
-    background-color: #e2e2e2;
+    background-color: var(--theme-drak-background-color);
     padding: 0 12px;
   }
   .content {
-    background-color: #f3f3f3;
+    background-color: var(--theme-drak-background-color-2);
     padding: 12px;
   }
 }

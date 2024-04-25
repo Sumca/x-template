@@ -21,7 +21,7 @@ const onClick = () => emit('toogleCollapse')
   width: 100%;
   height: 60px;
   line-height: 60px;
-  background-color: rgb(243, 247, 249);
+  background-color: var(--theme-drak-background-color-2);
   text-align: center;
   cursor: pointer;
   align-items: center;
@@ -33,7 +33,7 @@ const onClick = () => emit('toogleCollapse')
   }
   .logo-title {
     font-weight: 800;
-    color: black;
+    color: var(--theme-drak-color);
     font-size: 20px;
     line-height: 60px;
     font-family: FangSong;
