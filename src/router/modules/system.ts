@@ -29,6 +29,7 @@ const systemRoutes: RouteRecordRaw[] = [
     path: "/system",
     component: Layout,
     name: "System",
+    redirect: '/element',
     meta: { title: "系统管理", icon: "Menu", keepAlive: true, permissions:['admin']},
     children: [
       {
@@ -56,7 +57,7 @@ const systemRoutes: RouteRecordRaw[] = [
       {
         path: "/chart",
         name: "Chart",
-        component: () => import("@/views/home/home.vue"),
+        // component: () => import("@/views/home/home.vue"),
         meta: {
           title: "员工管理",
           icon: "Line",

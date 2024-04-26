@@ -7,7 +7,7 @@ const demoRoutes: RouteRecordRaw[] = [
   {
     path: "/demo",
     component: Layout,
-    redirect: "/demo",
+    redirect: "/demo1",
     name: "Demo",
     meta: { 
       title: "DEMO", 

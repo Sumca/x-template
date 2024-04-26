@@ -23,6 +23,8 @@ import { ref, reactive, computed } from 'vue'
 import MenuItem from '@/layout/menu/MenuItem.vue'
 import MenuLogo from '@/layout/menu/MenuLogo.vue'
 import { useRouter, useRoute } from 'vue-router'
+import Layout from '@/layout/index.vue'
+
 const emit = defineEmits(['toogleCollapse'])
 
 let isCollapse = ref(false)
@@ -32,8 +34,9 @@ const uniqueOpenedFlag = ref(true)
 const route = useRoute()
 const router = useRouter()
 
-const menuList = router.options.routes
-
+// const menuList = router.options.routes
+const allRoutes = router.getRoutes()
+const menuList = allRoutes.filter((route) => route.redirect)
 // 从路由中获取path
 const activeIndex = computed(() => {
   const { path } = route

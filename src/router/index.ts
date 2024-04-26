@@ -18,27 +18,27 @@ const constantRouters: RouteRecordRaw[] = [
     component: Login
   },
 ];
-const asyncRouters = await filterRoutesByPermission() // 异步的路由
+// const asyncRouters = await filterRoutesByPermission() // 异步的路由
 const router = createRouter({
     history: createWebHashHistory(), //替代之前的mode，是必须的
     routes:[
       ...constantRouters,
-      ...asyncRouters
+      // ...asyncRouters
     ]
 });
 
 // 路由守卫，在路由跳转前进行权限过滤
-// router.beforeEach(async (to, from, next) => {
-//   if (router.getRoutes().length === 2) { // 只包含登录路由
-//     const filteredRoutes = await filterRoutesByPermission();
-//     filteredRoutes.forEach(route => {
-//       router.addRoute(route);
-//     });
-//     next({ ...to, replace: true }); // 重定向到当前路由以确保路由重新解析
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  if (router.getRoutes().length === 2) { // 只包含登录路由
+    const filteredRoutes = await filterRoutesByPermission();
+    filteredRoutes.forEach(route => {
+      router.addRoute(route);
+    });
+    next({ ...to, replace: true }); // 重定向到当前路由以确保路由重新解析
+  } else {
+    next();
+  }
+});
 
 // 在路由导航解析即将完成时，动态添加权限路由
 // router.beforeResolve(async (to, from, next) => {

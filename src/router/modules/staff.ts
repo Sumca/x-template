@@ -8,6 +8,7 @@ const staffRoutes: RouteRecordRaw[] = [
     path: "/user",
     name: "User",
     component: Layout,
+    redirect: '/role',
     meta: {
       title: "用户管理",
       icon: "Setting",
