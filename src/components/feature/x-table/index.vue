@@ -1,5 +1,5 @@
 <template>
-  <el-card style="max-width: 100%">
+  <el-card class="table-card">
     <template #header>
       <div class="card-header">
         <div class="title">{{ title }}</div>
@@ -8,23 +8,29 @@
     <el-table v-bind="$attrs" :data="data" style="width: 100%">
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
-      <template v-for="column in columns" :key="column.prop">
+      <template v-for="column in tableMsg.tableColumns" :key="column.prop">
         <table-item :column="column"></table-item>
       </template>
+      <slot></slot>
     </el-table>
+    <slider
+      :columns="columns"
+      @checkedColumnsChange="sliderCheckedColumnsChange"
+    ></slider>
   </el-card>
 </template>
 
-<script lang="ts" setup name="x-table">
+<script lang="ts" setup name="Table">
 import tableItem from '@feature/x-table-item/index.vue'
+import slider from './slider/index.vue'
 
-import { reactive, PropType } from 'vue'
+import { reactive, ref } from 'vue'
 
 const props = defineProps({
   title: String,
   data: Array,
   columns: {
-    type: Array,
+    type: Array as () => columnProp[],
     default: () => [],
   },
   isNo: {
@@ -36,10 +42,23 @@ const props = defineProps({
     default: false,
   },
 })
+let tableMsg = reactive({ tableColumns: props.columns })
+// let tableColumns = ref<columnProp[]>(props.columns)
+
+// slider column 回调
+const sliderCheckedColumnsChange = (checkedArr: string[]) => {
+  tableMsg.tableColumns = props.columns.filter((item) =>
+    checkedArr.includes(item.prop)
+  )
+}
 </script>
-<style>
-.title {
-  text-align: left;
-  font-weight: 600;
+<style lang="scss" scoped>
+.table-card {
+  max-width: 100%;
+  position: relative;
+  .title {
+    text-align: left;
+    font-weight: 600;
+  }
 }
 </style>
