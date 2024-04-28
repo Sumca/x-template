@@ -17,7 +17,7 @@ const staffRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "/role",
-        name: "role",
+        name: "Role",
         component: () => import("@/views/userManagement/role/index.vue"),
         meta: {
           title: "角色管理",
@@ -27,7 +27,7 @@ const staffRoutes: RouteRecordRaw[] = [
       },
       {
         path: "/permissions",
-        name: "permissions",
+        name: "Permissions",
         component: () => import("@/views/userManagement/permissions/index.vue"),
         meta: {
           title: "权限管理",

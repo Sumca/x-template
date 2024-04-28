@@ -40,10 +40,7 @@ const rules = reactive<FormRules<typeof form>>({
   name: [{ required: true, trigger: 'blur' }],
   password: [{ required: true, trigger: 'blur' }],
 })
-const form = reactive({
-  name: '',
-  password: '',
-})
+const form = reactive({ name: '', password: '' })
 
 //
 const onLogin = async () => {

@@ -1,0 +1,51 @@
+{
+  "code": "200",
+  "msg": "success",
+  "data":[
+    { 
+      "name": "Root",
+      "title": "首页",
+      "id": "1",
+      "children":[
+        { "name": "Index","title": "首页", "id": "11"}
+      ]
+    },
+    {
+      "name": "System",
+      "title": "系统管理", 
+      "id": "2",
+      "children":[
+        { "name": "ElementComp","title": "菜单管理", "id": "21"},
+        { "name": "IconPark","title": "路由管理", "id": "22"},
+        { 
+          "name": "Chart",
+          "title": "员工管理",
+          "id": "23",
+          "children":[
+            { "name": "Line","title": "商品管理", "id": "231"},
+            { "name": "Bar","title": "手机管理", "id": "232"},
+            { "name": "OtherChart","title": "会员管理", "id": "233"}
+          ]
+        }
+      ]
+    },
+    { 
+      "name": "Demo",
+      "title": "DEMO", 
+      "id": "3",
+      "children":[
+        { "name": "Demo1","title": "DEMO1", "id": "31"},
+        { "name": "Chat","title": "图表", "id": "32"}
+      ]
+    },
+    { 
+      "name": "User",
+      "title": "用户管理", 
+      "id": "4",
+      "children":[
+        { "name": "Role","title": "角色管理", "id": "41"},
+        { "name": "Permissions","title": "权限管理", "id": "42"}
+      ]
+    }
+  ]
+}

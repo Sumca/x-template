@@ -23,14 +23,10 @@ requset.interceptors.request.use(
     const users = user()
     const token = users.getToken()
     config.baseURL = setBaseUrl(config.url) // 设置baseUrl
+    if(config.url === '/mock/login') return config
     if (token) {
       config.headers = { ...config.headers,Authorization: `Bearer ${token}` }; // 设置请求头部的 token
-    } else if( config.url !== '/mock/login') {
-      // 如果没有 token，跳转到登录页面
-      ElMessage.error('登陆失效, 请重新登陆.')
-      router.push('/login');
-      return
-    }
+    } 
     return config;
   },
   error => {
@@ -57,11 +53,17 @@ requset.interceptors.response.use(
   },
   error => {
     // 对响应错误
+    if(error.response.status === 401 || error.response.status === 403){
+      ElMessage.error('登录失效，请重新登录')
+      router.push('/login');
+    }else {
+      errorMessage(error.response.status)
+    }
     return Promise.reject(error);
   }
 );
 const errorMessage = (status:Number|string)=> {
-  ElMessage.error('Oops, this is a error message.')
+  ElMessage.error('Oops, error status:'+status)
 }
 export default requset;
 

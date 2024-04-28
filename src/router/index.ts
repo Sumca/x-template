@@ -29,7 +29,9 @@ const router = createRouter({
 
 // 路由守卫，在路由跳转前进行权限过滤
 router.beforeEach(async (to, from, next) => {
-  if (router.getRoutes().length === 2) { // 只包含登录路由
+  if(to.path === '/login') {
+    next();
+  }else if (router.getRoutes().length === 2) { // 只包含登录路由
     const filteredRoutes = await filterRoutesByPermission();
     filteredRoutes.forEach(route => {
       router.addRoute(route);

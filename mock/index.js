@@ -5,16 +5,23 @@ const app = express()
 
 const adminJson = require('./data/admin.json')
 const tableJson = require('./data/table_data.json')
+const permissionJson = require('./data/permission.json')
+
+const { checkToken } = require('./utils');
 
 // 使用CORS中间件
 app.use(cors());
-
-// app.get('/login',(req,res)=>{
-//   res.send(adminJson)
-// })
 app.post('/mock/login',(req,res)=>{
   res.send(adminJson)
 })
+
+
+// 使用中间件来检查 token
+app.use(checkToken);
+app.get('/mock/getPermission',(req,res)=>{
+  res.send(permissionJson)
+})
+
 app.post('/mock/tableInfo',(req,res)=>{
   res.send(tableJson)
 })

@@ -1,11 +1,19 @@
 import requset from "@/utils/request"
 
-// 登录获取用户token
+// 登录获取用户token和用户ID
 export const loginApi=(data:any)=>{
   return requset({
     url:"/mock/login",
     method:"POST",
     data
+  })
+}
+// 根据用户ID获取用户权限
+export const getUserPermission=(params:any)=>{
+  return requset({
+    url:"/mock/getPermission",
+    method:"GET",
+    params
   })
 }
 //
