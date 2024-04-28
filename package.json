@@ -2,8 +2,8 @@
   "name": "my-vue3",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
-    "sit": "vite --mode sit",
+    "dev": "vite --host --open",
+    "sit": "vite --mode sit --open",
     "build": "vite build"
   },
   "dependencies": {

@@ -19,6 +19,7 @@
       <xTable
         title="数据表格"
         max-height="300"
+        showSlider
         :columns="columns"
         :data="tableData"
       ></xTable>

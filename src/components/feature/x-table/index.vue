@@ -14,6 +14,7 @@
       <slot></slot>
     </el-table>
     <slider
+      v-if="showSlider"
       :columns="columns"
       @checkedColumnsChange="sliderCheckedColumnsChange"
     ></slider>
@@ -36,10 +37,17 @@ const props = defineProps({
   isNo: {
     type: Boolean,
     default: true,
+    coment: '是否展示序号',
   },
   isSelection: {
     type: Boolean,
     default: false,
+    coment: '是否展示行的复选框',
+  },
+  showSlider: {
+    type: Boolean,
+    default: false,
+    coment: '是否展示Slider',
   },
 })
 let tableMsg = reactive({ tableColumns: props.columns })
