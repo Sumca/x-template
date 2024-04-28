@@ -16,6 +16,14 @@ const onClick = () => emit('toogleCollapse')
 </script>
 
 <style lang="scss" scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .logo {
   display: flex;
   width: 100%;
@@ -37,6 +45,7 @@ const onClick = () => emit('toogleCollapse')
     font-size: 20px;
     line-height: 60px;
     font-family: FangSong;
+    animation: fadeIn 5s;
   }
 }
 </style>
