@@ -106,7 +106,19 @@ const onReset = useDebounceFn(async () => {
 
 const columns: columnProp[] = [
   { label: '姓名', prop: 'name' },
-  { label: '年龄', prop: 'age' },
+  { label: '年龄', prop: 'age', editable: true },
+  {
+    label: '性别',
+    prop: 'gender',
+    editable: true,
+    type: 'select',
+    attrs: {
+      options: [
+        { label: '男', value: 'man' },
+        { label: '女', value: 'feman' },
+      ],
+    },
+  },
   { label: '日期', prop: 'date' },
   { label: '地址', prop: 'address' },
 ]

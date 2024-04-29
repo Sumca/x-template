@@ -20,9 +20,10 @@ interface columnProp {
   width?:string
   editable?:boolean
   type?:string
-  attrs?:string
+  attrs?:object
   component?:object
-  linstener?:object
+  linstener?:object|Function|null
+  listeners?: object|Function|null
 }
 interface option {
   value: string|number|undefined|null
