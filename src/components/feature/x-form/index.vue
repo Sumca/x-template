@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import { getComponent, getComponentProp } from './config/factory'
 
-import { reactive, PropType } from 'vue'
+import { reactive, PropType, useAttrs } from 'vue'
 
 const props = defineProps({
   formItems: Array as PropType<itemProp[]>,
@@ -55,7 +55,8 @@ const props = defineProps({
   },
 })
 // do not use same name with ref
-const form = reactive({})
+const attrs = useAttrs()
+const form = reactive(attrs.modelValue as object)
 const _getComponent = (item: itemProp) => {
   return getComponent(item)
 }

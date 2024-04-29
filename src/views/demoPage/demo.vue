@@ -4,6 +4,7 @@
     <div>
       <x-form
         title="查询条件"
+        v-model="formData"
         :formItems="formItems"
         @submit="onSubmit"
         @reset="onReset"
@@ -34,6 +35,11 @@ import xSelect from '@feature/x-select/index.vue'
 import xTable from '@feature/x-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
+const formData = {
+  name: 'sss',
+  gender: 'feman',
+  classfly1: ['a', 'c'],
+}
 const formItems: itemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
@@ -56,6 +62,28 @@ const formItems: itemProp[] = [
     },
   },
   {
+    component: xSelect,
+    label: '类别',
+    prop: 'classfly1',
+    attrs: {
+      placeholder: '请选择类别',
+      clearable: true,
+      multiple: true,
+      collapseTags: true,
+      span: 6,
+      options: [
+        { label: 'a', value: 'a' },
+        { label: 'b', value: 'b' },
+        { label: 'c', value: 'c' },
+      ],
+    },
+    linstener: {
+      // change(val: any) {
+      //   console.log('类别: ', val)
+      // },
+    },
+  },
+  {
     type: 'input',
     label: '地址',
     prop: 'adress',
@@ -67,7 +95,7 @@ const formItems: itemProp[] = [
 // 查询
 let tableData = ref([])
 const onSubmit = async () => {
-  const params = { pagenum: 1, pagesize: 22 }
+  const params = { ...formData, pagenum: 1, pagesize: 22 }
   const { data } = (await getTableDataApi(params)) as any
   tableData.value = data
 }
