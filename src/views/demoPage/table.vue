@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Demo1">
+<script lang="ts" setup name="Table">
 import { ref, reactive } from 'vue'
 import GlTable from '@feature/gl-table/index.vue'
 import { getTableDataApi } from '@/api/common'

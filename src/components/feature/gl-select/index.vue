@@ -1,5 +1,5 @@
 <template>
-  <el-select v-bind="$attrs" v-model="selectData" @change="handleChangeOptions">
+  <el-select v-bind="$attrs" v-model="selectData">
     <template #header v-if="showSelectAll && $attrs.multiple">
       <el-checkbox
         v-model="checkAll"
@@ -18,33 +18,25 @@
   </el-select>
 </template>
 
-<script lang="ts" setup>
-import { ref, PropType, watch, useAttrs, computed } from 'vue'
-import type { CheckboxValueType } from 'element-plus'
-const emit = defineEmits(['update:modelValue'])
-
+<script lang="ts" setup name="GlSelect">
+import { ref, PropType, computed } from 'vue'
 const props = defineProps({
   options: Array as PropType<option[]>,
-  modelValue: {
-    type: [String, Number, Array],
-  },
   showSelectAll: {
     type: Boolean,
     default: true,
   },
 })
-// const attrs = useAttrs()
-// const checkAll = ref(false)
-// const indeterminate = ref(false)
-const selectData = ref(props.modelValue)
+let selectData = defineModel()
 
 const checkAll = computed(() => {
-  const val = selectData?.value as string | option[]
-  if (val.length === props?.options?.length) return true
+  const val = selectData.value as string | option[]
+  if (val?.length === props?.options?.length) return true
   return false
 })
 const indeterminate = computed(() => {
-  const val = selectData?.value as string | option[]
+  const val = selectData.value as string | option[]
+  if (!val) return false
   if (val.length === props?.options?.length || val.length === 0) return false
   return true
 })
@@ -65,13 +57,10 @@ const indeterminate = computed(() => {
 //   },
 //   { immediate: true }
 // )
-const handleChangeOptions = (val: string | option[]) => {
-  emit('update:modelValue', val)
-}
+
 const handleCheckAll = (val: option) => {
   // indeterminate.value = false
   const newVal = val ? props?.options?.map((_) => _.value) : []
   selectData.value = newVal
-  emit('update:modelValue', newVal)
 }
 </script>

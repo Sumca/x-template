@@ -5,7 +5,7 @@
         <div class="title">{{ title }}</div>
       </div>
     </template>
-    <el-form :model="form" :label-width="labelWidth || '80px'" v-bind="$attrs">
+    <el-form v-bind="$attrs" :model="form" :label-width="labelWidth || '80px'">
       <slot name="before" />
       <el-row>
         <template v-for="item in formItems" :key="item.label">
@@ -13,8 +13,8 @@
             <el-form-item :label="item.label">
               <component
                 :is="_getComponent(item)"
-                v-model="form[item.prop]"
                 v-bind="{ ..._getComponentProp(item.type), ...item.attrs }"
+                v-model="form[item.prop]"
                 v-on="{ ...item.linstener }"
               />
             </el-form-item>
@@ -34,10 +34,10 @@
   </el-card>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="GlForm">
 import { getComponent, getComponentProp } from './config/factory'
 
-import { reactive, PropType, useAttrs } from 'vue'
+import { ref, reactive, PropType, useAttrs, watch } from 'vue'
 
 const props = defineProps({
   formItems: Array as PropType<itemProp[]>,
@@ -55,8 +55,8 @@ const props = defineProps({
   },
 })
 // do not use same name with ref
-const attrs = useAttrs()
-const form = reactive(attrs.modelValue as object)
+const form = defineModel() as object
+// const form = ref(props.modelValue) as object
 const _getComponent = (item: itemProp) => {
   return getComponent(item)
 }

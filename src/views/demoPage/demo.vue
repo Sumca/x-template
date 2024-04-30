@@ -11,11 +11,6 @@
       >
       </gl-form>
     </div>
-    <!-- <div class="btn">
-      <el-button v-permission="'add'">add</el-button>
-      <el-button v-permission="'edit'">edit</el-button>
-      <el-button v-permission="'delete'">delete</el-button>
-    </div> -->
     <!-- 表格 -->
     <div style="margin-top: 10px">
       <edit-table
@@ -26,6 +21,7 @@
         :data="tableData"
       >
         <template #buttton>
+          <!-- 权限按钮 -->
           <el-button type="success" v-permission="'add'">新增</el-button>
           <el-button type="info" v-permission="'edit'">编辑</el-button>
           <el-button type="danger" v-permission="'delete'">删除</el-button>
@@ -42,11 +38,10 @@ import GlSelect from '@feature/gl-select/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
-const formData = {
-  name: 'sss',
-  gender: 'feman',
-  classfly1: ['a', 'c'],
-}
+// form 配置
+const formData = ref<object>({
+  name: '222',
+})
 const formItems: itemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
@@ -102,15 +97,15 @@ const formItems: itemProp[] = [
 // 查询
 let tableData = ref([])
 const onSubmit = async () => {
-  const params = { ...formData, pagenum: 1, pagesize: 22 }
+  const params = { ...formData.value, pagenum: 1, pagesize: 22 }
   const { data } = (await getTableDataApi(params)) as any
   tableData.value = data
 }
-//
+// 清空
 const onReset = useDebounceFn(async () => {
-  console.log('onReset')
+  formData.value = {}
 }, 200)
-
+// 表格列配置
 const columns: columnProp[] = [
   { label: '姓名', prop: 'name' },
   { label: '年龄', prop: 'age', editable: true },
