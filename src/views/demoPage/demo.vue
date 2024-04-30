@@ -8,13 +8,14 @@
         :formItems="formItems"
         @submit="onSubmit"
         @reset="onReset"
-      ></gl-form>
+      >
+      </gl-form>
     </div>
-    <div>
+    <!-- <div class="btn">
       <el-button v-permission="'add'">add</el-button>
       <el-button v-permission="'edit'">edit</el-button>
       <el-button v-permission="'delete'">delete</el-button>
-    </div>
+    </div> -->
     <!-- 表格 -->
     <div style="margin-top: 10px">
       <edit-table
@@ -23,7 +24,13 @@
         showSlider
         :columns="columns"
         :data="tableData"
-      ></edit-table>
+      >
+        <template #buttton>
+          <el-button type="success" v-permission="'add'">新增</el-button>
+          <el-button type="info" v-permission="'edit'">编辑</el-button>
+          <el-button type="danger" v-permission="'delete'">删除</el-button>
+        </template>
+      </edit-table>
     </div>
   </div>
 </template>

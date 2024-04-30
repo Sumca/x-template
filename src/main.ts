@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router/index'; //引入vue-router
 import { createPinia } from 'pinia'; //引入pinia
 import '@/style/reset.css'
-
+// ElementPlus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
-
+//css
 import './index.css'
 import '@/style/reset_element.css'
 import '@/style/theme.css'
@@ -27,7 +28,9 @@ app.use(createPinia())
 app.use(router); // 挂载到app上
 
 
-app.use(ElementPlus)
+app.use(ElementPlus,{
+  locale: zhCn,
+})
 
 
 app.mount('#app');

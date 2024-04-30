@@ -3,6 +3,7 @@
     <template #header>
       <div class="card-header">
         <div class="title">{{ title }}</div>
+        <div class="btn-solt"><slot name="buttton" /></div>
       </div>
     </template>
     <el-table v-bind="$attrs" :data="data" style="width: 100%">
@@ -67,6 +68,17 @@ const sliderCheckedColumnsChange = (checkedArr: string[]) => {
   .title {
     text-align: left;
     font-weight: 600;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      text-align: left;
+      font-weight: 600;
+    }
+    .btn-solt {
+      padding: 0 6px;
+    }
   }
 }
 </style>
