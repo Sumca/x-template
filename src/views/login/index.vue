@@ -50,7 +50,9 @@ const onLogin = async () => {
   const users = user()
   // 设置token
   users.setToken(token)
-  router.push('/') // 跳转首页
+  const query = router.currentRoute.value.query
+  const path = (query.redirect as string) || '/'
+  router.push(path) // 跳转
 }
 </script>
 <style scoped>

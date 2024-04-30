@@ -30,6 +30,7 @@ const router = createRouter({
 // 路由守卫，在路由跳转前进行权限过滤
 router.beforeEach(async (to, from, next) => {
   if(to.path === '/login') {
+    to.query = { redirect: from.fullPath} // 登录后重定向至原来的页面
     next();
   }else if (router.getRoutes().length === 2) { // 只包含登录路由
     const filteredRoutes = await filterRoutesByPermission();
