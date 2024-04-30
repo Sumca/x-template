@@ -2,13 +2,13 @@
   <div>
     <!-- 表单 -->
     <div>
-      <x-form
+      <gl-form
         title="查询条件"
         v-model="formData"
         :formItems="formItems"
         @submit="onSubmit"
         @reset="onReset"
-      ></x-form>
+      ></gl-form>
     </div>
     <div>
       <el-button v-permission="'add'">add</el-button>
@@ -17,22 +17,22 @@
     </div>
     <!-- 表格 -->
     <div style="margin-top: 10px">
-      <xTable
+      <edit-table
         title="数据表格"
         max-height="300"
         showSlider
         :columns="columns"
         :data="tableData"
-      ></xTable>
+      ></edit-table>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup name="Demo1">
 import { ref, reactive } from 'vue'
-import xForm from '@feature/x-form/index.vue'
-import xSelect from '@feature/x-select/index.vue'
-import xTable from '@feature/x-table/index.vue'
+import GlForm from '@feature/gl-form/index.vue'
+import GlSelect from '@feature/gl-select/index.vue'
+import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 const formData = {
@@ -43,7 +43,7 @@ const formData = {
 const formItems: itemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
-    component: xSelect,
+    component: GlSelect,
     label: '性别',
     prop: 'gender',
     attrs: {
@@ -62,7 +62,7 @@ const formItems: itemProp[] = [
     },
   },
   {
-    component: xSelect,
+    component: GlSelect,
     label: '类别',
     prop: 'classfly1',
     attrs: {

@@ -10,6 +10,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 
 import './index.css'
+import '@/style/reset_element.css'
 import '@/style/theme.css'
 
 import { useAllBtnPermission } from './directives'

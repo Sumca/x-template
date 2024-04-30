@@ -17,6 +17,18 @@ const demoRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: "/table",
+        name: "Table",
+        component: () => import("@/views/demoPage/table.vue"),
+        meta: {
+          title: "表格",
+          icon: "Home",
+          affix: true,
+          keepAlive: true,
+          permissions:['admin']
+        },
+      },
+      {
         path: "/demo1",
         name: "Demo1",
         component: () => import("@/views/demoPage/demo.vue"),

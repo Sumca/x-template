@@ -29,6 +29,7 @@ html.--theme__drak {
   --el-text-color-secondary: #909399;
   --el-text-color-placeholder: #a8abb2;
   --el-fill-color-blank: #2c2b2b;
+  --el-fill-color:#1a1b1c;
   /* 自定义部分 */
   --theme-drak-background-color: #2c2b2b;
   --theme-drak-color: #d8dee9;

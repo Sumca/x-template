@@ -20,7 +20,7 @@
   </el-table-column>
 </template>
 
-<script lang="ts" setup name="TableItem">
+<script lang="ts" setup name="EditTableColumn">
 import { ref, reactive, PropType, computed } from 'vue'
 import { getComponentByType } from './config/factory'
 
