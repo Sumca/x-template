@@ -22,9 +22,11 @@
       >
         <template #buttton>
           <!-- 权限按钮 -->
-          <el-button type="success" v-permission="'add'">新增</el-button>
-          <el-button type="info" v-permission="'edit'">编辑</el-button>
-          <el-button type="danger" v-permission="'delete'">删除</el-button>
+          <el-button type="success" v-permission="'Demo1.add'">新增</el-button>
+          <el-button type="info" v-permission="'Demo1.edit'">编辑</el-button>
+          <el-button type="danger" v-permission="'Demo1.delete'"
+            >删除</el-button
+          >
         </template>
       </edit-table>
     </div>

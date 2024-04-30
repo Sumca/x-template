@@ -34,9 +34,15 @@
       "title": "DEMO", 
       "id": "3",
       "children":[
-        { "name": "Demo1","title": "DEMO1", "id": "31"},
-        { "name": "Chat","title": "图表", "id": "32"},
-        { "name": "Table","title": "表格", "id": "33"}
+        { "name": "Demo1","title": "DEMO1", "id": "31",
+          "button":["Demo1.add","Demo1.delete"]
+        },
+        { "name": "Chat","title": "图表", "id": "32",
+          "button":["Chat.add","Chat.delete","Chat.edit"]
+        },
+        { "name": "Table","title": "表格", "id": "33",       
+          "button":["Table.export"]
+        }
       ]
     },
     { 

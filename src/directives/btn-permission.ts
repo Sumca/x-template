@@ -1,9 +1,10 @@
 import { App } from 'vue'
-const btns = ['add','delete'] // 按钮权限集
+//buttonsFromCache 根据value判断按钮是否有权限
+import { buttonsFromCache } from '@/utils/btnPermission'
 export const defaultPermission = (app:App<Element>)=>{
   app.directive('permission', {
     mounted(el, binding) {
-      if(!btns.includes(binding.value)) {
+      if(!buttonsFromCache(binding.value)) {
         el.remove()
       }
     },

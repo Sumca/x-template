@@ -8,7 +8,7 @@
       :data="tableData"
     >
       <template #buttton>
-        <el-button>导出</el-button>
+        <el-button v-permission="'Table.export'">导出</el-button>
       </template>
     </gl-table>
   </div>
