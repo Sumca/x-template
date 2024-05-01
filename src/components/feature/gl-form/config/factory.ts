@@ -24,7 +24,7 @@ const PROPS = {
   }
 } 
 
-export function getComponent(formItem:itemProp) {
+export function getComponent(formItem:ItemProp) {
   if(formItem.type) return TYPES[formItem.type]
   return formItem?.component
 }

@@ -44,7 +44,7 @@ import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 const formData = ref<object>({
   name: '222',
 })
-const formItems: itemProp[] = [
+const formItems: ItemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
     component: GlSelect,
@@ -108,7 +108,7 @@ const onReset = useDebounceFn(async () => {
   formData.value = {}
 }, 200)
 // 表格列配置
-const columns: columnProp[] = [
+const columns: ColumnProp[] = [
   { label: '姓名', prop: 'name' },
   { label: '年龄', prop: 'age', editable: true },
   {

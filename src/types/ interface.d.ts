@@ -1,11 +1,11 @@
-interface columItem {
+interface ColumItem {
   type: string
   label: string
   prop: string
   attrs?: object
 }
 
-interface itemProp {
+interface ItemProp {
   type?: string
   label: string
   prop: string
@@ -14,7 +14,7 @@ interface itemProp {
   linstener?:object
   span?:number
 }
-interface columnProp {
+interface ColumnProp {
   prop: string
   label?:string
   width?:string
@@ -25,7 +25,7 @@ interface columnProp {
   linstener?:object|Function|null
   listeners?: object|Function|null
 }
-interface option {
+interface Option {
   value: string|number|undefined|null
   label: string|number
 }
@@ -34,7 +34,7 @@ interface SquareConfig {
   width?: number
 }
 
-interface tagsViewItemProp {
+interface TagsViewItemProp {
   name:string,
   title:string,
   path:string,

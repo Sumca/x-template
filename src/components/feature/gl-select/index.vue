@@ -21,7 +21,7 @@
 <script lang="ts" setup name="GlSelect">
 import { ref, PropType, computed } from 'vue'
 const props = defineProps({
-  options: Array as PropType<option[]>,
+  options: Array as PropType<Option[]>,
   showSelectAll: {
     type: Boolean,
     default: true,
@@ -30,19 +30,19 @@ const props = defineProps({
 let selectData = defineModel()
 
 const checkAll = computed(() => {
-  const val = selectData.value as string | option[]
+  const val = selectData.value as string | Option[]
   if (val?.length === props?.options?.length) return true
   return false
 })
 const indeterminate = computed(() => {
-  const val = selectData.value as string | option[]
+  const val = selectData.value as string | Option[]
   if (!val) return false
   if (val.length === props?.options?.length || val.length === 0) return false
   return true
 })
 
 // watch(
-//   () => selectData as string | option[],
+//   () => selectData as string | Option[],
 //   (val) => {
 //     if (typeof val === 'string') return
 //     if (val.length === 0) {
@@ -58,7 +58,7 @@ const indeterminate = computed(() => {
 //   { immediate: true }
 // )
 
-const handleCheckAll = (val: option) => {
+const handleCheckAll = (val: Option) => {
   // indeterminate.value = false
   const newVal = val ? props?.options?.map((_) => _.value) : []
   selectData.value = newVal

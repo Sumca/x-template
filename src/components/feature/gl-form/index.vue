@@ -40,7 +40,7 @@ import { getComponent, getComponentProp } from './config/factory'
 import { ref, reactive, PropType, useAttrs, watch } from 'vue'
 
 const props = defineProps({
-  formItems: Array as PropType<itemProp[]>,
+  formItems: Array as PropType<ItemProp[]>,
   title: String,
   labelWidth: String,
   showTitle: {
@@ -57,7 +57,7 @@ const props = defineProps({
 // do not use same name with ref
 const form = defineModel() as object
 // const form = ref(props.modelValue) as object
-const _getComponent = (item: itemProp) => {
+const _getComponent = (item: ItemProp) => {
   return getComponent(item)
 }
 const _getComponentProp = (type?: string) => {

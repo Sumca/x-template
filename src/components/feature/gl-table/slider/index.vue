@@ -51,7 +51,7 @@
 import { ref, reactive, watch } from 'vue'
 
 const { columns = [] } = defineProps<{
-  columns: columnProp[]
+  columns: ColumnProp[]
 }>()
 
 // 展开折叠面板

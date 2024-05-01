@@ -26,7 +26,7 @@ import { getComponentByType } from './config/factory'
 
 const props = defineProps({
   column: {
-    type: Object as () => columnProp,
+    type: Object as () => ColumnProp,
     default: () => {
       return {
         prop: '',
@@ -44,7 +44,7 @@ const props = defineProps({
 })
 
 //
-const getComponent = (column: columnProp) => {
+const getComponent = (column: ColumnProp) => {
   const type = column.type
   return getComponentByType(type)
 }

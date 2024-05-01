@@ -46,7 +46,7 @@ const props = defineProps({
   title: String,
   data: Array,
   columns: {
-    type: Array as () => columnProp[],
+    type: Array as () => ColumnProp[],
     default: () => [],
   },
   showPagination: {
@@ -85,7 +85,7 @@ const props = defineProps({
 })
 // slider
 let tableMsg = reactive({ tableColumns: props.columns })
-// let tableColumns = ref<columnProp[]>(props.columns)
+// let tableColumns = ref<ColumnProp[]>(props.columns)
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
   tableMsg.tableColumns = props.columns.filter((item) =>

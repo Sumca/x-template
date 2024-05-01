@@ -7,25 +7,25 @@ import { useRouter } from 'vue-router'
 export const useTagsStore = defineStore('useTagsStore',()=>{
   const router = useRouter()
 
-  let tags = ref<tagsViewItemProp[]>([])
-  let activedTag = ref<tagsViewItemProp>()
+  let tags = ref<TagsViewItemProp[]>([])
+  let activedTag = ref<TagsViewItemProp>()
   // const getterName = computed(()=>{
   //   return name.value+'+computed'
   // })
   // 添加新的tag
-  const addTag = (tag:tagsViewItemProp)=> {
+  const addTag = (tag:TagsViewItemProp)=> {
     if (tags.value.some((v) => v.path === tag.path)) {
       return;
     }
     tags.value.push(tag)
   }
   // 设置actived tag
-  const setActiveTag = (tag:tagsViewItemProp)=>{
+  const setActiveTag = (tag:TagsViewItemProp)=>{
     activedTag.value = tag
     router.push(tag.path)
   }
   // 移除tag
-  const removeTags = (tag:tagsViewItemProp)=>{
+  const removeTags = (tag:TagsViewItemProp)=>{
     if(tags.value.length === 1) {
       ElMessage.warning('已经是最后一个标签！')
       return

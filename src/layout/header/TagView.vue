@@ -55,16 +55,16 @@ watch(
   { immediate: true }
 )
 // 点击切换
-const handleClickTag = (tag: tagsViewItemProp) => {
+const handleClickTag = (tag: TagsViewItemProp) => {
   tagsStore.setActiveTag(tag)
 }
 // 右键菜单
-let activedMenu = ref<tagsViewItemProp>()
-const rightClickTag = (tag: tagsViewItemProp) => {
+let activedMenu = ref<TagsViewItemProp>()
+const rightClickTag = (tag: TagsViewItemProp) => {
   activedMenu.value = tag
 }
 //关闭
-const handleClose = (tag: tagsViewItemProp) => {
+const handleClose = (tag: TagsViewItemProp) => {
   tagsStore.removeTags(tag)
 }
 // 关闭所有

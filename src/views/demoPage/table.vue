@@ -30,7 +30,7 @@ const onSearch = async () => {
 onSearch()
 
 //
-const columns: columnProp[] = [
+const columns: ColumnProp[] = [
   { label: '姓名', prop: 'name' },
   { label: '年龄', prop: 'age' },
   {
