@@ -1,7 +1,10 @@
 
+import SelectColumn from '@/components/feature/gl-select/index.vue'
+
 const TYPES = {
   input: 'ElInput',
-  select: 'ElSelect',
+  elSelect: 'ElSelect',
+  select: SelectColumn,
   date: 'ElDatePicker',
   time: 'ElTimePicker',
   checkbox: 'ElCheckbox',

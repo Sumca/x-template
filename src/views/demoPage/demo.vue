@@ -36,18 +36,20 @@
 <script lang="ts" setup name="Demo1">
 import { ref, reactive } from 'vue'
 import GlForm from '@feature/gl-form/index.vue'
-import GlSelect from '@feature/gl-select/index.vue'
+// import GlSelect from '@feature/gl-select/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
+import { placeholderSign } from 'element-plus/es/components/table-v2/src/private'
 // form 配置
 const formData = ref<object>({
   name: '222',
+  classfly1: ['a'],
 })
 const formItems: ItemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
-    component: GlSelect,
+    type: 'select',
     label: '性别',
     prop: 'gender',
     attrs: {
@@ -66,7 +68,7 @@ const formItems: ItemProp[] = [
     },
   },
   {
-    component: GlSelect,
+    type: 'select',
     label: '类别',
     prop: 'classfly1',
     attrs: {
@@ -82,10 +84,17 @@ const formItems: ItemProp[] = [
       ],
     },
     linstener: {
-      // change(val: any) {
-      //   console.log('类别: ', val)
-      // },
+      change(val: any) {
+        console.log('类别: ', val)
+      },
     },
+  },
+  {
+    type: 'dateYMD',
+    label: '日期',
+    prop: 'date',
+    span: 6,
+    attrs: { placeholder: '选择日期' },
   },
   {
     type: 'input',
@@ -123,7 +132,15 @@ const columns: ColumnProp[] = [
       ],
     },
   },
-  { label: '日期', prop: 'date' },
+  {
+    label: '日期',
+    prop: 'date',
+    type: 'date',
+    editable: true,
+    attrs: {
+      valueFormat: 'YYYY-MM-DD',
+    },
+  },
   { label: '地址', prop: 'address' },
 ]
 //
