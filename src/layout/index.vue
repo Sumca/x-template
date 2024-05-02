@@ -15,7 +15,10 @@
       <!-- 内容区的主体，用于数据展示 -->
       <el-main class="content">
         <!-- <router-view></router-view> -->
-        <router-view v-slot="{ Component, route }">
+        <router-view
+          v-slot="{ Component, route }"
+          v-if="tagsStore.refreshTagStatus"
+        >
           <keep-alive>
             <component
               v-if="route.meta.keepAlive"
@@ -38,6 +41,9 @@
 import Header from '@/layout/header/Header.vue'
 import Menu from '@/layout/menu/Menu.vue'
 import { ref } from 'vue'
+import { useTagsStore } from '@/store/tags'
+
+const tagsStore = useTagsStore()
 
 let isCollapse = ref(false)
 const toogleCollapse = () => {
@@ -49,6 +55,7 @@ const toogleCollapse = () => {
 .container {
   height: 100%;
   .aside {
+    height: 100%;
     background-color: var(--theme-drak-background-color);
     transition: width 0.5s;
   }

@@ -15,8 +15,7 @@
 
 <script setup lang="ts" name="Contextmenu">
 import { useProps } from 'element-plus/es/components/select-v2/src/useProps'
-import { watchEffect, watch } from 'vue'
-import { ref } from 'vue'
+import { ref, watchEffect, watch } from 'vue'
 import type { DropdownInstance } from 'element-plus'
 
 const props = defineProps({

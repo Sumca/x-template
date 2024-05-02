@@ -19,7 +19,7 @@
               :activedMenu="activedMenu"
               @close="handleClose(tag)"
               @closeAll="handleCloseAll"
-              @refresh=""
+              @refresh="handleRefresh"
             />
           </el-tag>
         </template>
@@ -70,6 +70,10 @@ const handleClose = (tag: TagsViewItemProp) => {
 // 关闭所有
 const handleCloseAll = () => {
   tagsStore.removeAllTags()
+}
+// 刷新tag
+const handleRefresh = () => {
+  tagsStore.refreshTag()
 }
 </script>
 

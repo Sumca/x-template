@@ -1,6 +1,5 @@
-import { set } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { ref,computed, reactive, toRaw } from 'vue'
+import { ref,computed, reactive, toRaw, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 
@@ -9,6 +8,7 @@ export const useTagsStore = defineStore('useTagsStore',()=>{
 
   let tags = ref<TagsViewItemProp[]>([])
   let activedTag = ref<TagsViewItemProp>()
+  let refreshTagStatus = ref(true)
   // const getterName = computed(()=>{
   //   return name.value+'+computed'
   // })
@@ -45,13 +45,22 @@ export const useTagsStore = defineStore('useTagsStore',()=>{
     tags.value.push(indexTag)
     setActiveTag(indexTag)
   }
+  // 刷新tag
+  const refreshTag = ()=>{
+    refreshTagStatus.value = false
+    nextTick(()=>{
+      refreshTagStatus.value = true
+    })
+  }
   return { 
     tags,
     activedTag,
+    refreshTagStatus,
     addTag,
     setActiveTag,
     removeTags,
-    removeAllTags
+    removeAllTags,
+    refreshTag
    }
 
 })
