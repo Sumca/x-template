@@ -24,7 +24,10 @@
           <!-- 权限按钮 -->
           <el-button type="success" v-permission="'Demo1.add'">新增</el-button>
           <el-button type="info" v-permission="'Demo1.edit'">编辑</el-button>
-          <el-button type="danger" v-permission="'Demo1.delete'"
+          <el-button
+            type="danger"
+            v-permission="'Demo1.delete'"
+            v-debounce="onDelete"
             >删除</el-button
           >
         </template>
@@ -143,4 +146,7 @@ const columns: ColumnProp[] = [
   { label: '地址', prop: 'address' },
 ]
 //
+const onDelete = () => {
+  console.log('onDelete')
+}
 </script>
