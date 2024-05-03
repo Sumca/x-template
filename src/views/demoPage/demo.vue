@@ -5,7 +5,7 @@
       <gl-form
         title="查询条件"
         v-model="formData"
-        :formItems="formItems"
+        :form-items="formItems"
         @submit="onSubmit"
         @reset="onReset"
       >
@@ -14,16 +14,20 @@
     <!-- 表格 -->
     <div style="margin-top: 10px">
       <edit-table
+        ref="editTable"
         title="数据表格"
         max-height="300"
         showSlider
+        :is-selection="true"
         :columns="columns"
         :data="tableData"
       >
         <template #buttton>
           <!-- 权限按钮 -->
-          <el-button type="success" v-permission="'Demo1.add'">新增</el-button>
-          <el-button type="info" v-permission="'Demo1.edit'">编辑</el-button>
+          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd"
+            >新增</el-button
+          >
+          <el-button type="info" @click="onSave">保存</el-button>
           <el-button
             type="danger"
             v-permission="'Demo1.delete'"
@@ -108,7 +112,7 @@ const formItems: ItemProp[] = [
   { type: 'input', label: '电话', prop: 'phone', span: 6 },
 ]
 // 查询
-let tableData = ref([])
+let tableData = ref<object[]>([])
 const onSubmit = async () => {
   const params = { ...formData.value, pagenum: 1, pagesize: 22 }
   const { data } = (await getTableDataApi(params)) as any
@@ -120,13 +124,21 @@ const onReset = useDebounceFn(async () => {
 }, 200)
 // 表格列配置
 const columns: ColumnProp[] = [
-  { label: '姓名', prop: 'name' },
-  { label: '年龄', prop: 'age', editable: true },
+  { label: '姓名', prop: 'name', width: '100' },
+  { label: '年龄', prop: 'age', width: '100', editable: true },
+  {
+    label: '邮箱',
+    prop: 'email',
+    editable: true,
+    width: '200',
+    attrs: { disabled: true },
+  },
   {
     label: '性别',
     prop: 'gender',
     editable: true,
     type: 'select',
+    width: '100',
     attrs: {
       options: [
         { label: '男', value: 'man' },
@@ -139,14 +151,24 @@ const columns: ColumnProp[] = [
     prop: 'date',
     type: 'date',
     editable: true,
+    width: '280',
     attrs: {
       valueFormat: 'YYYY-MM-DD',
     },
   },
-  { label: '地址', prop: 'address' },
+  { label: '地址', prop: 'address', width: '280' },
 ]
+const editTable = ref()
+//
+const onAdd = () => {
+  tableData.value.unshift({})
+}
+//
+const onSave = () => {
+  console.log('onSave: tableData', tableData.value)
+}
 //
 const onDelete = () => {
-  console.log('onDelete')
+  console.log('onDelete editTable', editTable.value.getSelectionRows())
 }
 </script>

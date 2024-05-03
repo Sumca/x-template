@@ -6,7 +6,7 @@
         <div class="btn-solt"><slot name="buttton" /></div>
       </div>
     </template>
-    <el-table v-bind="$attrs" :data="data" style="width: 100%">
+    <el-table ref="table" v-bind="$attrs" :data="data" style="width: 100%">
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
       <template v-for="column in tableMsg.tableColumns" :key="column.prop">
@@ -25,8 +25,9 @@
 <script lang="ts" setup name="EditTable">
 import EditTableColumn from '@feature/edit-table-column/index.vue'
 import Slider from './slider/index.vue'
-
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
+import { ElTable } from 'element-plus'
+// import { useComponent } from '@/hooks/useComponentMethods'
 
 const props = defineProps({
   title: String,
@@ -60,6 +61,18 @@ const sliderCheckedColumnsChange = (checkedArr: string[]) => {
     checkedArr.includes(item.prop)
   )
 }
+// 获取到el-table的方法，然后 defineExpose 将el-table的方法暴露出去
+const elTableMethods = ref({})
+const table = ref<InstanceType<typeof ElTable>>()
+onMounted(() => {
+  const refMethods = Object.entries(table.value as object).filter(
+    ([_, value]) => value instanceof Function
+  )
+  refMethods.forEach(([key, value]) => {
+    elTableMethods.value[key] = value
+  })
+})
+defineExpose(elTableMethods.value)
 </script>
 <style lang="scss" scoped>
 .table-card {

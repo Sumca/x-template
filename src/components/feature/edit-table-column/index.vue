@@ -2,7 +2,7 @@
   <el-table-column
     :prop="column.prop"
     :label="column.label"
-    :width="column.label"
+    :width="column.width"
   >
     <template v-if="column.editable" #default="{ row }">
       <component
