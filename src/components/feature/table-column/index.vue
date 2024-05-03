@@ -6,7 +6,11 @@
   >
     <template #default="{ row }">
       <div>
-        {{ column.labelRender ? column.labelRender() : row[column.prop] }}
+        {{
+          column.labelRender
+            ? column.labelRender(row[column.prop], row)
+            : row[column.prop]
+        }}
       </div>
     </template>
   </el-table-column>

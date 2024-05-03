@@ -24,6 +24,7 @@ interface ColumnProp {
   component?:object
   linstener?:object|Function|null
   listeners?: object|Function|null
+  labelRender?:object|Function|null
 }
 interface Option {
   value: string|number|undefined|null

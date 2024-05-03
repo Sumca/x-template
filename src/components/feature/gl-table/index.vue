@@ -1,5 +1,5 @@
 <template>
-  <el-card class="table-card" v-loding="loading">
+  <el-card class="table-card" v-loading="loading">
     <!-- 头部 -->
     <template #header>
       <div class="card-header">
