@@ -40,7 +40,6 @@ import GlForm from '@feature/gl-form/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
-import { placeholderSign } from 'element-plus/es/components/table-v2/src/private'
 // form 配置
 const formData = ref<object>({
   name: '222',

@@ -37,7 +37,7 @@
 <script lang="ts" setup name="GlForm">
 import { getComponent, getComponentProp } from './config/factory'
 
-import { ref, reactive, PropType, useAttrs, watch } from 'vue'
+import { PropType } from 'vue'
 
 const props = defineProps({
   formItems: Array as PropType<ItemProp[]>,
@@ -66,12 +66,8 @@ const _getComponentProp = (type?: string) => {
 
 //
 const emit = defineEmits(['submit', 'reset'])
-const onClickQuery = () => {
-  emit('submit')
-}
-const onClickReset = () => {
-  emit('reset')
-}
+const onClickQuery = () => emit('submit')
+const onClickReset = () => emit('reset')
 </script>
 <style lang="scss" scoped>
 .title {

@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup name="GlSelect">
-import { ref, PropType, computed, watch } from 'vue'
+import { ref, PropType, watch } from 'vue'
 const emit = defineEmits(['change'])
 const props = defineProps({
   options: Array as PropType<Option[]>,

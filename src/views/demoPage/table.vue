@@ -5,13 +5,16 @@
       max-height="300"
       showSlider
       :columns="columns"
-      :data="tableData"
+      :http-request="getTableDataApi"
+      :http-request-params="{ name: 1, ll: 22 }"
+      http-immediate
     >
       <template #buttton>
         <el-button v-permission="'Table.export'">导出</el-button>
       </template>
     </gl-table>
   </div>
+  <!-- <div><el-button @click="() => onSearch()">cha</el-button></div> -->
 </template>
 
 <script lang="ts" setup name="Table">
@@ -27,7 +30,7 @@ const onSearch = async () => {
   const { data } = (await getTableDataApi(params)) as any
   tableData.value = data
 }
-onSearch()
+// onSearch()
 
 //
 const columns: ColumnProp[] = [

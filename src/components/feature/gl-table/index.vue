@@ -1,17 +1,20 @@
 <template>
-  <el-card class="table-card">
+  <el-card class="table-card" v-loding="loading">
     <!-- 头部 -->
     <template #header>
       <div class="card-header">
-        <div class="title">{{ title }}</div>
+        <div class="title">
+          <div class="main-title">{{ title }}</div>
+          <div class="sub-title">总计{{ pages.total }}条</div>
+        </div>
         <div class="btn-solt"><slot name="buttton" /></div>
       </div>
     </template>
     <!-- 表格 -->
-    <el-table v-bind="$attrs" :data="data" style="width: 100%">
+    <el-table v-bind="$attrs" :data="tableData" style="width: 100%">
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
-      <template v-for="column in tableMsg.tableColumns" :key="column.prop">
+      <template v-for="column in tableColumns" :key="column.prop">
         <table-column :column="column"></table-column>
       </template>
       <slot></slot>
@@ -40,14 +43,16 @@
 <script lang="ts" setup name="Table">
 import TableColumn from '@feature/table-column/index.vue'
 import Slider from './slider/index.vue'
+import { reactive, ref, watchEffect } from 'vue'
 
-import { reactive, ref, useAttrs } from 'vue'
+const emit = defineEmits(['sizeChange', 'currentChange'])
 const props = defineProps({
   title: String,
   data: Array,
   columns: {
     type: Array as () => ColumnProp[],
     default: () => [],
+    coment: '表头数据',
   },
   showPagination: {
     type: Boolean,
@@ -65,7 +70,7 @@ const props = defineProps({
         layout: 'total, sizes, prev, pager, next, jumper',
       }
     },
-    coment: '是否展示分页',
+    coment: '分页具体配置信息',
   },
   isNo: {
     type: Boolean,
@@ -82,30 +87,73 @@ const props = defineProps({
     default: false,
     coment: '是否展示Slider',
   },
+  httpRequest: {
+    type: Function,
+    default: null,
+    coment: '请求的API',
+  },
+  httpRequestParams: {
+    type: Object,
+    default: () => {},
+    coment: '请求的参数',
+  },
+  httpImmediate: {
+    type: Boolean,
+    default: false,
+    coment: '请求默认加载一次',
+  },
+})
+// 表格数据
+let tableData = ref<object[]>([])
+watchEffect(() => {
+  tableData.value = props.data as object[]
 })
 // slider
-let tableMsg = reactive({ tableColumns: props.columns })
-// let tableColumns = ref<ColumnProp[]>(props.columns)
+let tableColumns = ref<ColumnProp[]>([])
+watchEffect(() => {
+  tableColumns.value = props.columns as ColumnProp[]
+})
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
-  tableMsg.tableColumns = props.columns.filter((item) =>
+  tableColumns.value = props.columns.filter((item) =>
     checkedArr.includes(item.prop)
   )
 }
-const currentPage = ref(1)
-const pageSize = ref(100)
+
 // page
 const pages = reactive({
-  currentPage: 4,
-  pageSize: 100,
-  total: 204,
+  currentPage: 1,
+  pageSize: props.pageConfig.pageSizes[0],
+  total: 0,
 })
 const handleSizeChange = (val: number) => {
-  console.log('val: ', val)
+  pages.pageSize = val
+  searchTableData()
+  emit('sizeChange', val)
 }
 const handleCurrentChange = (val: number) => {
-  console.log('val: ', val)
+  pages.currentPage = val
+  emit('currentChange', val)
+  searchTableData()
 }
+// loading
+let loading = ref(false)
+// 请求
+const searchTableData = async () => {
+  if (!props.httpRequest) return
+  loading.value = true
+  const params = {
+    ...props.httpRequestParams,
+    page: pages.currentPage,
+    size: pages.pageSize,
+  }
+  const { data } = await props.httpRequest(params)
+  tableData.value = data || []
+  pages.total = data.length || 0
+  loading.value = false
+}
+// 默认加载一次请求
+if (props.httpImmediate) searchTableData()
 </script>
 <style lang="scss" scoped>
 .table-card {
@@ -116,7 +164,9 @@ const handleCurrentChange = (val: number) => {
     justify-content: space-between;
     .title {
       text-align: left;
-      font-weight: 600;
+      .main-title {
+        font-weight: 600;
+      }
     }
     .btn-solt {
       padding: 0 6px;
