@@ -125,7 +125,13 @@ const onReset = useDebounceFn(async () => {
 // 表格列配置
 const columns: ColumnProp[] = [
   { label: '姓名', prop: 'name', width: '100' },
-  { label: '年龄', prop: 'age', width: '100', editable: true },
+  {
+    label: '年龄',
+    prop: 'age',
+    width: '100',
+    editable: true,
+    rules: [{ required: true, message: '年龄不能为空' }],
+  },
   {
     label: '邮箱',
     prop: 'email',
@@ -139,7 +145,9 @@ const columns: ColumnProp[] = [
     editable: true,
     type: 'select',
     width: '100',
+    rules: [{ required: true, message: '性别不能为空' }],
     attrs: {
+      clearable: true,
       options: [
         { label: '男', value: 'man' },
         { label: '女', value: 'feman' },

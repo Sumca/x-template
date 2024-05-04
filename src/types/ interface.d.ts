@@ -22,6 +22,7 @@ interface ColumnProp {
   type?:string
   attrs?:object
   component?:object
+  rules?: object[]
   linstener?:object|Function|null
   listeners?: object|Function|null
   labelRender?:object|Function|null

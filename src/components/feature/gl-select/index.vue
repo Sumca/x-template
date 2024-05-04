@@ -1,5 +1,5 @@
 <template>
-  <el-select v-bind="$attrs" v-model="selectData">
+  <el-select v-bind="$attrs" v-model="selectData" @change="onChange">
     <template #header v-if="showSelectAll && $attrs.multiple">
       <el-checkbox
         v-model="checkAll"
@@ -60,7 +60,9 @@ watch(
   },
   { immediate: true }
 )
-
+const onChange = (val: string | Option[]) => {
+  emit('change', val)
+}
 const handleCheckAll = (val: Option) => {
   // indeterminate.value = false
   const newVal = val ? props?.options?.map((_) => _.value) : []
