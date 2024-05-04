@@ -8,7 +8,7 @@ const staffRoutes: RouteRecordRaw[] = [
     path: "/user",
     name: "User",
     component: Layout,
-    redirect: '/role',
+    redirect: '/user/role',
     meta: {
       title: "用户管理",
       icon: "Setting",
@@ -16,7 +16,7 @@ const staffRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "/role",
+        path: "/user/role",
         name: "Role",
         component: () => import("@/views/userManagement/role/index.vue"),
         meta: {
@@ -26,7 +26,7 @@ const staffRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/permissions",
+        path: "/user/permissions",
         name: "Permissions",
         component: () => import("@/views/userManagement/permissions/index.vue"),
         meta: {

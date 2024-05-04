@@ -29,11 +29,11 @@ const systemRoutes: RouteRecordRaw[] = [
     path: "/system",
     component: Layout,
     name: "System",
-    redirect: '/element',
+    redirect: '/system/element',
     meta: { title: "系统管理", icon: "Menu", keepAlive: true, permissions:['admin']},
     children: [
       {
-        path: "/element",
+        path: "/system/element",
         name: "ElementComp",
         component: () => import("@/views/home/home.vue"),
         meta: {
@@ -44,7 +44,7 @@ const systemRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/router-management",
+        path: "/system/router-management",
         name: "IconPark",
         component: () => import("@/views/systemManagement/routerManagement.vue"),
         meta: {
@@ -55,9 +55,9 @@ const systemRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/chart",
+        path: "/system/chart",
         name: "Chart",
-        // component: () => import("@/views/home/home.vue"),
+        // redirect: '/system/chart/line',
         meta: {
           title: "员工管理",
           icon: "Line",
@@ -66,7 +66,7 @@ const systemRoutes: RouteRecordRaw[] = [
         },
         children: [
           {
-            path: "/line",
+            path: "/system/chart/line",
             name: "Line",
             component: () => import("@/views/home/home.vue"),
             meta: {
@@ -77,7 +77,7 @@ const systemRoutes: RouteRecordRaw[] = [
             },
           },
           {
-            path: "/bar",
+            path: "/system/chart/bar",
             name: "Bar",
             component: () => import("@/views/home/home.vue"),
             meta: {
@@ -87,7 +87,7 @@ const systemRoutes: RouteRecordRaw[] = [
             },
           },
           {
-            path: "/otherChart",
+            path: "/system/chart/otherChart",
             name: "OtherChart",
             component: () => import("@/views/home/home.vue"),
             meta: {

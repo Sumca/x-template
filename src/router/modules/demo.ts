@@ -7,7 +7,7 @@ const demoRoutes: RouteRecordRaw[] = [
   {
     path: "/demo",
     component: Layout,
-    redirect: "/demo1",
+    redirect: "/demo/demo1",
     name: "Demo",
     meta: { 
       title: "DEMO", 
@@ -17,7 +17,7 @@ const demoRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "/table",
+        path: "/demo/table",
         name: "Table",
         component: () => import("@/views/demoPage/table.vue"),
         meta: {
@@ -29,7 +29,7 @@ const demoRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/demo1",
+        path: "/demo/demo1",
         name: "Demo1",
         component: () => import("@/views/demoPage/demo.vue"),
         meta: {
@@ -41,7 +41,7 @@ const demoRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "/chat",
+        path: "/demo/chat",
         name: "Chat",
         component: () => import("@/views/demoPage/chat.vue"),
         meta: {
