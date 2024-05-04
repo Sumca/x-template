@@ -11,7 +11,7 @@
       </div>
     </template>
     <!-- 表格 -->
-    <el-table v-bind="$attrs" :data="tableData" style="width: 100%">
+    <el-table ref="table" v-bind="$attrs" :data="tableData" style="width: 100%">
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
       <template v-for="column in tableColumns" :key="column.prop">
@@ -43,7 +43,8 @@
 <script lang="ts" setup name="Table">
 import TableColumn from '@feature/table-column/index.vue'
 import Slider from './slider/index.vue'
-import { reactive, ref, watchEffect } from 'vue'
+import { reactive, ref, watchEffect, onMounted } from 'vue'
+import { ElTable } from 'element-plus'
 
 const emit = defineEmits(['sizeChange', 'currentChange'])
 const props = defineProps({
@@ -154,6 +155,18 @@ const searchTableData = async () => {
 }
 // 默认加载一次请求
 if (props.httpImmediate) searchTableData()
+// 获取到el-table的方法，然后 defineExpose 将el-table的方法暴露出去
+const elTableMethods = ref({})
+const table = ref<InstanceType<typeof ElTable>>()
+onMounted(() => {
+  const refMethods = Object.entries(table.value as object).filter(
+    ([_, value]) => value instanceof Function
+  )
+  refMethods.forEach(([key, value]) => {
+    elTableMethods.value[key] = value
+  })
+})
+defineExpose(elTableMethods.value)
 </script>
 <style lang="scss" scoped>
 .table-card {

@@ -40,6 +40,13 @@ const columns: ColumnProp[] = [
       return val === 'man' ? '男' : val === 'feman' ? '女' : ''
     },
   },
+  {
+    label: '状态',
+    prop: 'status',
+    labelRender: (val: string) => {
+      return `<h3>状态</h3>`
+    },
+  },
   { label: '日期', prop: 'date' },
   { label: '地址', prop: 'address' },
 ]
