@@ -170,6 +170,7 @@ const editTable = ref()
 //
 const onAdd = () => {
   tableData.value.unshift({})
+  editTable.value.clearValidate()
 }
 //
 const onSave = () => {
@@ -177,6 +178,6 @@ const onSave = () => {
 }
 //
 const onDelete = () => {
-  console.log('onDelete editTable', editTable.value.getSelectionRows())
+  console.log('getSelectionRows: ', editTable.value.getSelectionRows())
 }
 </script>

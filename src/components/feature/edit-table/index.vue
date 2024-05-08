@@ -10,7 +10,10 @@
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
       <template v-for="column in tableMsg.tableColumns" :key="column.prop">
-        <edit-table-column :column="column"></edit-table-column>
+        <edit-table-column
+          ref="editTableColumns"
+          :column="column"
+        ></edit-table-column>
       </template>
       <slot></slot>
     </el-table>
@@ -25,7 +28,7 @@
 <script lang="ts" setup name="EditTable">
 import EditTableColumn from '@feature/edit-table-column/index.vue'
 import Slider from './slider/index.vue'
-import { reactive, ref, onMounted } from 'vue'
+import { reactive, ref, onMounted, watch } from 'vue'
 import { ElTable } from 'element-plus'
 // import { useComponent } from '@/hooks/useComponentMethods'
 
@@ -72,6 +75,20 @@ onMounted(() => {
     elTableMethods.value[key] = value
   })
 })
+// clearValidate
+const editTableColumns = ref()
+const clearValidate = () => {
+  editTableColumns.value?.forEach((item: any) => {
+    item.clearValidate()
+  })
+}
+elTableMethods.value['clearValidate'] = clearValidate
+// 查询清空校验
+watch(
+  () => props.data,
+  () => clearValidate()
+)
+
 defineExpose(elTableMethods.value)
 </script>
 <style lang="scss" scoped>

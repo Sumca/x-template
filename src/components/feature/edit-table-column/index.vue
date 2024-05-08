@@ -61,6 +61,13 @@ const onValidate = (val: ValProp, row: object, idx: number) => {
   const error = useValidate(val, row, props.column.rules)
   errorMessages[props.column.prop + idx] = error
 }
+// clearValidate
+const clearValidate = () => {
+  for (const key in errorMessages) {
+    delete errorMessages[key]
+  }
+}
+defineExpose({ clearValidate })
 //
 </script>
 <style lang="scss" scoped>
