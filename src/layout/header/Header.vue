@@ -5,6 +5,7 @@
       <TagView />
     </div>
     <div class="avatar-container">
+      <Locale />
       <ThemeControl />
       <Avatar />
     </div>
@@ -16,6 +17,7 @@ import BreadCrumb from './BreadCrumb.vue'
 import TagView from './TagView.vue'
 import Avatar from './Avatar.vue'
 import ThemeControl from './ThemeControl.vue'
+import Locale from './Locale.vue'
 </script>
 
 <style lang="scss" scoped>

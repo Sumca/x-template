@@ -7,7 +7,6 @@ import '@/style/reset.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 //
 import i18n from '@/lang/index';
@@ -31,9 +30,7 @@ app.use(createPinia())
 app.use(router); // 挂载到app上
 
 
-app.use(ElementPlus,{
-  locale: zhCn,
-})
+app.use(ElementPlus)
 app.use(i18n)
 
 
