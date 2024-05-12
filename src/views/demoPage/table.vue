@@ -11,9 +11,9 @@
       http-immediate
     >
       <template #buttton>
-        <el-button v-permission="'Table.export'" @click="onExport"
-          >导出</el-button
-        >
+        <el-button v-permission="'Table.export'" @click="onExport">{{
+          $t('common.export')
+        }}</el-button>
       </template>
     </gl-table>
   </div>
