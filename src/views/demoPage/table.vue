@@ -2,7 +2,7 @@
   <div>
     <gl-table
       id="table"
-      title="数据表格"
+      :title="$t('common.dataTable')"
       max-height="300"
       showSlider
       :columns="columns"
@@ -14,6 +14,7 @@
         <el-button v-permission="'Table.export'" @click="onExport">{{
           $t('common.export')
         }}</el-button>
+        <el-button @click="onExport">{{ $t('common.print') }}</el-button>
       </template>
     </gl-table>
   </div>

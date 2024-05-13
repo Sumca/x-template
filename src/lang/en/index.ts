@@ -1,6 +1,7 @@
 export default {
-  common:{
-    export: 'export',
-    print: 'print'
+  "common":{
+    "export": 'export',
+    "print": 'print',
+    "dataTable":'Data Table',
   },
 }
