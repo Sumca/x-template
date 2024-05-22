@@ -29,7 +29,6 @@ import { useDownloadExcel } from '@/hooks/useDownloadXlsx' // vueuse 工具集
 const onExport = () => {
   useDownloadExcel('table', '测试表格名')
 }
-
 // 表头数据
 const columns: ColumnProp[] = [
   { label: '姓名', prop: 'name' },
@@ -51,5 +50,5 @@ const columns: ColumnProp[] = [
   { label: '日期', prop: 'date' },
   { label: '地址', prop: 'address' },
 ]
-//
+console.log(columns)
 </script>

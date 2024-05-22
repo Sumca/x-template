@@ -1,8 +1,8 @@
 
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router';
 // import Layout from "@/layout/index.vue"
-import NotFound from '@/views/errorPage/404.vue';
-import Login from '@/views/login/index.vue';
+// import NotFound from '@/views/errorPage/404.vue';
+// import Login from '@/views/login/index.vue';
 // import staffRoutes from './modules/staff';
 // import systemRoutes from './modules/system';
 import { filterRoutesByPermission } from '@/utils/permission';
@@ -11,11 +11,11 @@ import { filterRoutesByPermission } from '@/utils/permission';
 const constantRouters: RouteRecordRaw[] = [
   {
     path: '/:catchAll(.*)', // 捕获所有路由
-    component: NotFound
+    component: import('@/views/errorPage/404.vue')
   },
   {
     path: "/login",
-    component: Login
+    component: import('@/views/login/index.vue')
   },
 ];
 // const asyncRouters = await filterRoutesByPermission() // 异步的路由

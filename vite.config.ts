@@ -1,13 +1,15 @@
 import { resolve } from 'path'
-import path from 'path'
 
 import { defineConfig, UserConfig,loadEnv } from 'vite'
 import { createHtmlPlugin } from "vite-plugin-html";
 import VueSetuoExtend from 'vite-plugin-vue-setup-extend'
+import viteCompression from 'vite-plugin-compression'
+import transformConsolePlugin from './plugins/vitePluginTransformConsole'
 
 import vue from '@vitejs/plugin-vue'
 
-const srcPath = resolve(__dirname, 'src')
+// ./src和src均可以，path模块会自行处理； __dirname始终返回的是当前文件所在的目录
+const srcPath = resolve(__dirname, 'src') 
 //这个配置 为了在html中使用 环境变量
 const getViteEnv = (mode, target) => {
   return loadEnv(mode, process.cwd())[target];
@@ -20,6 +22,8 @@ const getViteEnv = (mode, target) => {
   plugins: [
     vue(),
     VueSetuoExtend(),
+    viteCompression(), // 开启gzip压缩插件
+    transformConsolePlugin(),
     createHtmlPlugin({
       inject: {
         data: {
@@ -31,11 +35,11 @@ const getViteEnv = (mode, target) => {
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@feature': path.resolve(__dirname, './src/components/feature'),
-      '@bussiness': path.resolve(__dirname, './src/components/bussiness'),
-      '@store': path.resolve(__dirname, './src/store'),
-      '#':path.resolve(__dirname, './src/types'),
+      '@': srcPath,
+      '@feature': resolve(__dirname, 'src/components/feature'),
+      '@bussiness': resolve(__dirname, 'src/components/bussiness'),
+      '@store': resolve(__dirname, 'src/store'),
+      '#':resolve(__dirname, 'src/types'),
     }
   },
   css: {
@@ -45,7 +49,28 @@ const getViteEnv = (mode, target) => {
         // additionalData: '@import "@/assets/scss/global.scss";'
         additionalData: '@use "@/assets/scss/global.scss" as *;'
       }
+    },
+    devSourcemap: true, // 开始css Sourcemap 文件索引
+    postcss: {
+
     }
   },
+  build: {
+    // rollup 配置项
+    rollupOptions:{ 
+      output:{
+        // rollup分包，将node_modules的都分成vendor
+        manualChunks:(id: string)=>{
+          if(id.includes('node_modules')){
+            return 'vendor'
+          }
+        },
+        assetFileNames:'[name].[hash].[ext]',
+        // chunkFileNames:'[name].[hash].[ext]'
+      }
+    },
+    outDir: 'dist', // 文件名默认dist
+    assetsDir: 'assets', // 静态资源文件名 默认assets
+  }
 }) 
 export default config
