@@ -32,4 +32,12 @@ export const getTableDataApi=(data:any)=>{
     data
   })
 }
+// 获取服务端的翻译信息
+export const getTranslateApi=(params?:any)=>{
+  return requset({
+    url:"/mock/getTranslateInfo",
+    method:"GET",
+    params
+  })
+}
 

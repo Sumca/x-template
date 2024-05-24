@@ -1,0 +1,20 @@
+{
+  "code": "200",
+  "msg": "success",
+  "data": {
+    "zh": {
+      "common":{
+        "export": "导出",
+        "print": "打印",
+        "dataTable":"数据表格"
+      }
+    },
+    "en": {
+      "common":{
+        "export": "export",
+        "print": "print",
+        "dataTable":"Data Table"
+      }
+    }
+  }
+}

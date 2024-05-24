@@ -28,8 +28,6 @@ useAllBtnPermission(app)
 
 app.use(createPinia())
 app.use(router); // 挂载到app上
-
-
 app.use(ElementPlus)
 app.use(i18n)
 

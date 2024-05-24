@@ -6,6 +6,7 @@ const app = express()
 const adminJson = require('./data/admin.json')
 const tableJson = require('./data/table_data.json')
 const permissionJson = require('./data/permission.json')
+const translateJson = require('./data/translate.json')
 
 const { checkToken } = require('./utils');
 
@@ -24,6 +25,10 @@ app.get('/mock/getPermission',(req,res)=>{
 
 app.post('/mock/tableInfo',(req,res)=>{
   res.send(tableJson)
+})
+
+app.get('/mock/getTranslateInfo',(req,res)=>{
+  res.send(translateJson)
 })
 
 app.listen(3000,()=>{

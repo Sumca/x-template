@@ -3,10 +3,16 @@ import zh from './zh/index'
 import en from './en/index'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import enUs from 'element-plus/es/locale/lang/en'
+import { setLocalTranslate, getLocalTranslateInfo } from '@/utils/setLocalTranslate'
 
+
+
+setLocalTranslate()
+const localZh = getLocalTranslateInfo('zh')
+const localEn = getLocalTranslateInfo('en')
 const messages = {
-  en:{ ...en,...enUs },
-  zh:{ ...zh, ...zhCn},
+  en:{ ...en, ...enUs, ...localEn },
+  zh:{ ...zh, ...zhCn, ...localZh },
 }
 
 const language = (navigator.language || 'en').toLocaleLowerCase() // 获取浏览器的语言
