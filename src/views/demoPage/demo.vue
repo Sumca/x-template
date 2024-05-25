@@ -8,8 +8,7 @@
         :form-items="formItems"
         @submit="onSubmit"
         @reset="onReset"
-      >
-      </gl-form>
+      ></gl-form>
     </div>
     <!-- 表格 -->
     <div style="margin-top: 10px">
@@ -24,16 +23,9 @@
       >
         <template #buttton>
           <!-- 权限按钮 -->
-          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd"
-            >新增</el-button
-          >
+          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd">新增</el-button>
           <el-button type="info" @click="onSave">保存</el-button>
-          <el-button
-            type="danger"
-            v-permission="'Demo1.delete'"
-            v-debounce="onDelete"
-            >删除</el-button
-          >
+          <el-button type="danger" v-permission="'Demo1.delete'" v-debounce="onDelete">删除</el-button>
         </template>
       </edit-table>
     </div>
@@ -50,7 +42,7 @@ import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 // form 配置
 const formData = ref<object>({
   name: '222',
-  classfly1: ['a'],
+  classfly1: ['a']
 })
 const formItems: ItemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
@@ -64,14 +56,14 @@ const formItems: ItemProp[] = [
       span: 6,
       options: [
         { label: '男', value: 'man' },
-        { label: '女', value: 'feman' },
-      ],
+        { label: '女', value: 'feman' }
+      ]
     },
     linstener: {
       change(val: any) {
         console.log('性别: ', val)
-      },
-    },
+      }
+    }
   },
   {
     type: 'select',
@@ -86,30 +78,30 @@ const formItems: ItemProp[] = [
       options: [
         { label: 'a', value: 'a' },
         { label: 'b', value: 'b' },
-        { label: 'c', value: 'c' },
-      ],
+        { label: 'c', value: 'c' }
+      ]
     },
     linstener: {
       change(val: any) {
         console.log('类别: ', val)
-      },
-    },
+      }
+    }
   },
   {
     type: 'dateYMD',
     label: '日期',
     prop: 'date',
     span: 6,
-    attrs: { placeholder: '选择日期' },
+    attrs: { placeholder: '选择日期' }
   },
   {
     type: 'input',
     label: '地址',
     prop: 'adress',
     span: 12,
-    attrs: { type: 'textarea' },
+    attrs: { type: 'textarea' }
   },
-  { type: 'input', label: '电话', prop: 'phone', span: 6 },
+  { type: 'input', label: '电话', prop: 'phone', span: 6 }
 ]
 // 查询
 let tableData = ref<object[]>([])
@@ -130,14 +122,14 @@ const columns: ColumnProp[] = [
     prop: 'age',
     width: '100',
     editable: true,
-    rules: [{ required: true, message: '年龄不能为空' }],
+    rules: [{ required: true, message: '年龄不能为空' }]
   },
   {
     label: '邮箱',
     prop: 'email',
     editable: true,
     width: '200',
-    attrs: { disabled: true },
+    attrs: { disabled: true }
   },
   {
     label: '性别',
@@ -150,9 +142,9 @@ const columns: ColumnProp[] = [
       clearable: true,
       options: [
         { label: '男', value: 'man' },
-        { label: '女', value: 'feman' },
-      ],
-    },
+        { label: '女', value: 'feman' }
+      ]
+    }
   },
   {
     label: '日期',
@@ -161,10 +153,10 @@ const columns: ColumnProp[] = [
     editable: true,
     width: '280',
     attrs: {
-      valueFormat: 'YYYY-MM-DD',
-    },
+      valueFormat: 'YYYY-MM-DD'
+    }
   },
-  { label: '地址', prop: 'address', width: '280' },
+  { label: '地址', prop: 'address', width: '280' }
 ]
 const editTable = ref()
 //

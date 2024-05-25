@@ -11,9 +11,7 @@
       http-immediate
     >
       <template #buttton>
-        <el-button v-permission="'Table.export'" @click="onExport">{{
-          $t('common.export')
-        }}</el-button>
+        <el-button v-permission="'Table.export'" @click="onExport">{{ $t('common.export') }}</el-button>
         <el-button @click="onExport">{{ $t('common.print') }}</el-button>
       </template>
     </gl-table>
@@ -38,17 +36,17 @@ const columns: ColumnProp[] = [
     prop: 'gender',
     labelRender: (val: string) => {
       return val === 'man' ? '男' : val === 'feman' ? '女' : ''
-    },
+    }
   },
   {
     label: '状态',
     prop: 'status',
     labelRender: (val: string) => {
       return `<h3>状态</h3>`
-    },
+    }
   },
   { label: '日期', prop: 'date' },
-  { label: '地址', prop: 'address' },
+  { label: '地址', prop: 'address' }
 ]
 console.log(columns)
 </script>
