@@ -122,7 +122,12 @@ const columns: ColumnProp[] = [
     prop: 'age',
     width: '100',
     editable: true,
-    rules: [{ required: true, message: '年龄不能为空' }]
+    rules: [{ required: true, message: '年龄不能为空' }],
+    linstener: {
+      change(val: string) {
+        console.log(val)
+      }
+    }
   },
   {
     label: '邮箱',
@@ -144,6 +149,11 @@ const columns: ColumnProp[] = [
         { label: '男', value: 'man' },
         { label: '女', value: 'feman' }
       ]
+    },
+    linstener: {
+      change(val: string) {
+        console.log(val)
+      }
     }
   },
   {
