@@ -10,18 +10,11 @@
       <el-table-column v-if="isSelection" type="selection" width="55" />
       <el-table-column v-if="isNo" label="序号" type="index" width="70" />
       <template v-for="column in tableMsg.tableColumns" :key="column.prop">
-        <edit-table-column
-          ref="editTableColumns"
-          :column="column"
-        ></edit-table-column>
+        <edit-table-column ref="editTableColumns" :column="column" @edit="onRowEdit"></edit-table-column>
       </template>
       <slot></slot>
     </el-table>
-    <slider
-      v-if="showSlider"
-      :columns="columns"
-      @checkedColumnsChange="sliderCheckedColumnsChange"
-    ></slider>
+    <slider v-if="showSlider" :columns="columns" @checkedColumnsChange="sliderCheckedColumnsChange"></slider>
   </el-card>
 </template>
 
@@ -31,46 +24,42 @@ import Slider from './slider/index.vue'
 import { reactive, ref, onMounted, watch } from 'vue'
 import { ElTable } from 'element-plus'
 // import { useComponent } from '@/hooks/useComponentMethods'
-
+const emit = defineEmits(['row-edit'])
 const props = defineProps({
   title: String,
   data: Array,
   columns: {
     type: Array as () => ColumnProp[],
-    default: () => [],
+    default: () => []
   },
   isNo: {
     type: Boolean,
     default: true,
-    coment: '是否展示序号',
+    coment: '是否展示序号'
   },
   isSelection: {
     type: Boolean,
     default: false,
-    coment: '是否展示行的复选框',
+    coment: '是否展示行的复选框'
   },
   showSlider: {
     type: Boolean,
     default: false,
-    coment: '是否展示Slider',
-  },
+    coment: '是否展示Slider'
+  }
 })
 let tableMsg = reactive({ tableColumns: props.columns })
 // let tableColumns = ref<ColumnProp[]>(props.columns)
 
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
-  tableMsg.tableColumns = props.columns.filter((item) =>
-    checkedArr.includes(item.prop)
-  )
+  tableMsg.tableColumns = props.columns.filter((item) => checkedArr.includes(item.prop))
 }
 // 获取到el-table的方法，然后 defineExpose 将el-table的方法暴露出去
 const elTableMethods = ref({})
 const table = ref<InstanceType<typeof ElTable>>()
 onMounted(() => {
-  const refMethods = Object.entries(table.value as object).filter(
-    ([_, value]) => value instanceof Function
-  )
+  const refMethods = Object.entries(table.value as object).filter(([_, value]) => value instanceof Function)
   refMethods.forEach(([key, value]) => {
     elTableMethods.value[key] = value
   })
@@ -83,6 +72,10 @@ const clearValidate = () => {
   })
 }
 elTableMethods.value['clearValidate'] = clearValidate
+//
+const onRowEdit = (val: object) => {
+  emit('row-edit', val)
+}
 // 查询清空校验
 watch(
   () => props.data,

@@ -27,6 +27,7 @@ import { ref, reactive, PropType, computed } from 'vue'
 import { getComponentByType } from './config/factory'
 import { useValidate } from './config/validate'
 
+const emit = defineEmits(['edit'])
 const props = defineProps({
   column: {
     type: Object as () => ColumnProp,
@@ -54,6 +55,7 @@ const getComponent = (column: ColumnProp) => {
 const errorMessages = reactive({})
 type ValProp = string | number | object[] | null | undefined
 const onValidate = (val: ValProp, row: object, idx: number) => {
+  emit('edit', { value: val, row, column: props.column })
   if (!props.column.rules) return
   const error = useValidate(val, row, props.column.rules)
   errorMessages[props.column.prop + idx] = error

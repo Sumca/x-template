@@ -20,6 +20,7 @@
         :is-selection="true"
         :columns="columns"
         :data="tableData"
+        @row-edit="onRowEdit"
       >
         <template #buttton>
           <!-- 权限按钮 -->
@@ -169,16 +170,20 @@ const columns: ColumnProp[] = [
   { label: '地址', prop: 'address', width: '280' }
 ]
 const editTable = ref()
-//
+// 编辑时触发
+const onRowEdit = (value: object) => {
+  console.log(value)
+}
+// 新增
 const onAdd = () => {
   tableData.value.unshift({})
   editTable.value.clearValidate()
 }
-//
+// 保存
 const onSave = () => {
   console.log('onSave: tableData', tableData.value)
 }
-//
+// 删除
 const onDelete = () => {
   console.log('getSelectionRows: ', editTable.value.getSelectionRows())
 }
