@@ -25,7 +25,7 @@ export default function transformConsolePlugin(): Plugin {
             const variable = p1.trim();
 
             // 如果已经是 console.log('%c variable:', 'color: blue', variable) 格式，则不替换
-            if (/^'.*',/.test(variable)) {
+            if (/^'.*'/.test(variable)) {
               return match;
             }
 
