@@ -40,7 +40,8 @@ const getViteEnv = (mode, target) => {
       '@bussiness': resolve(__dirname, 'src/components/bussiness'),
       '@store': resolve(__dirname, 'src/store'),
       '#':resolve(__dirname, 'src/types'),
-    }
+    },
+    // extensions:[]
   },
   css: {
     preprocessorOptions: {
