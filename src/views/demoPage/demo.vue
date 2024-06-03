@@ -34,7 +34,7 @@
             <el-input size="small" placeholder="Type to search" />
           </template>
           <template #default="scope">
-            <el-button link type="primary" size="small">Detail</el-button>
+            <el-button link type="primary" size="small">{{ scope.row.name }}</el-button>
             <el-button link type="primary" size="small">Edit</el-button>
           </template>
         </el-table-column>
