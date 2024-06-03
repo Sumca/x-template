@@ -12,10 +12,7 @@
         >
           选择全部
         </el-checkbox>
-        <el-checkbox-group
-          v-model="checkedColumns"
-          @change="handleCheckedColumn"
-        >
+        <el-checkbox-group v-model="checkedColumns" @change="handleCheckedColumn">
           <el-checkbox
             class="checkbox-item"
             v-for="column in columns"
@@ -23,12 +20,7 @@
             :label="column.label"
             :value="column.prop"
           >
-            <el-tooltip
-              class="box-item"
-              effect="dark"
-              :content="column.label"
-              placement="top-start"
-            >
+            <el-tooltip class="box-item" effect="dark" :content="column.label" placement="top-start">
               {{ column.label }}
             </el-tooltip>
           </el-checkbox>
@@ -38,10 +30,12 @@
     <!--操作按钮 -->
     <div class="slider-btn">
       <div class="slider-btn-item" @click="handelClickBtn('Columns')">
-        <el-icon><Operation /></el-icon> Columns
+        <el-icon><Operation /></el-icon>
+        Columns
       </div>
       <div class="slider-btn-item" @click="handelClickBtn('Filter')">
-        <el-icon><Filter /></el-icon> Filter
+        <el-icon><Filter /></el-icon>
+        Filter
       </div>
     </div>
   </div>
@@ -89,7 +83,7 @@ watch(checkedColumns, (val) => {
   overflow-y: auto;
   right: 0;
   top: 0;
-  z-index: 1;
+  z-index: 10;
   display: flex;
 
   .slider-list {

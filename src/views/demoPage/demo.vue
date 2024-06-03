@@ -28,6 +28,17 @@
           <el-button type="info" @click="onSave">保存</el-button>
           <el-button type="danger" v-permission="'Demo1.delete'" v-debounce="onDelete">删除</el-button>
         </template>
+        <!-- 操作列 原el-table 插槽 -->
+        <el-table-column fixed="right" label="操作" width="120">
+          <template #header>
+            <el-input size="small" placeholder="Type to search" />
+          </template>
+          <template #default="scope">
+            <el-button link type="primary" size="small">Detail</el-button>
+            <el-button link type="primary" size="small">Edit</el-button>
+          </template>
+        </el-table-column>
+        <!-- <template #empty>无数据啊</template> -->
       </edit-table>
     </div>
   </div>

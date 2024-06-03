@@ -18,6 +18,12 @@
         <table-column :column="column"></table-column>
       </template>
       <slot></slot>
+      <template #empty>
+        <slot name="empty"></slot>
+      </template>
+      <template #append>
+        <slot name="append"></slot>
+      </template>
     </el-table>
     <!-- 分页 -->
     <div class="pagination-content">
@@ -32,11 +38,7 @@
       />
     </div>
     <!-- 列操作侧边栏 -->
-    <slider
-      v-if="showSlider"
-      :columns="columns"
-      @checkedColumnsChange="sliderCheckedColumnsChange"
-    ></slider>
+    <slider v-if="showSlider" :columns="columns" @checkedColumnsChange="sliderCheckedColumnsChange"></slider>
   </el-card>
 </template>
 
@@ -53,12 +55,12 @@ const props = defineProps({
   columns: {
     type: Array as () => ColumnProp[],
     default: () => [],
-    coment: '表头数据',
+    coment: '表头数据'
   },
   showPagination: {
     type: Boolean,
     default: true,
-    coment: '是否展示分页',
+    coment: '是否展示分页'
   },
   pageConfig: {
     type: Object,
@@ -68,41 +70,41 @@ const props = defineProps({
         small: true,
         disabled: false,
         background: true,
-        layout: 'total, sizes, prev, pager, next, jumper',
+        layout: 'total, sizes, prev, pager, next, jumper'
       }
     },
-    coment: '分页具体配置信息',
+    coment: '分页具体配置信息'
   },
   isNo: {
     type: Boolean,
     default: true,
-    coment: '是否展示序号',
+    coment: '是否展示序号'
   },
   isSelection: {
     type: Boolean,
     default: false,
-    coment: '是否展示行的复选框',
+    coment: '是否展示行的复选框'
   },
   showSlider: {
     type: Boolean,
     default: false,
-    coment: '是否展示Slider',
+    coment: '是否展示Slider'
   },
   httpRequest: {
     type: Function,
     default: null,
-    coment: '请求的API',
+    coment: '请求的API'
   },
   httpRequestParams: {
     type: Object,
     default: () => {},
-    coment: '请求的参数',
+    coment: '请求的参数'
   },
   httpImmediate: {
     type: Boolean,
     default: false,
-    coment: '请求默认加载一次',
-  },
+    coment: '请求默认加载一次'
+  }
 })
 // 表格数据
 let tableData = ref<object[]>([])
@@ -116,16 +118,14 @@ watchEffect(() => {
 })
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
-  tableColumns.value = props.columns.filter((item) =>
-    checkedArr.includes(item.prop)
-  )
+  tableColumns.value = props.columns.filter((item) => checkedArr.includes(item.prop))
 }
 
 // page
 const pages = reactive({
   currentPage: 1,
   pageSize: props.pageConfig.pageSizes[0],
-  total: 0,
+  total: 0
 })
 const handleSizeChange = (val: number) => {
   pages.pageSize = val
@@ -146,7 +146,7 @@ const searchTableData = async () => {
   const params = {
     ...props.httpRequestParams,
     page: pages.currentPage,
-    size: pages.pageSize,
+    size: pages.pageSize
   }
   const { data } = await props.httpRequest(params)
   tableData.value = data || []
@@ -159,9 +159,7 @@ if (props.httpImmediate) searchTableData()
 const elTableMethods = ref({})
 const table = ref<InstanceType<typeof ElTable>>()
 onMounted(() => {
-  const refMethods = Object.entries(table.value as object).filter(
-    ([_, value]) => value instanceof Function
-  )
+  const refMethods = Object.entries(table.value as object).filter(([_, value]) => value instanceof Function)
   refMethods.forEach(([key, value]) => {
     elTableMethods.value[key] = value
   })

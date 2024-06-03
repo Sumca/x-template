@@ -12,7 +12,17 @@
       <template v-for="column in tableMsg.tableColumns" :key="column.prop">
         <edit-table-column ref="editTableColumns" :column="column" @edit="onRowEdit"></edit-table-column>
       </template>
+
       <slot></slot>
+      <template #empty>
+        <slot name="empty"></slot>
+      </template>
+      <template #append>
+        <slot name="append"></slot>
+      </template>
+
+      <!-- <template v-for="(value, name) in $slots">
+      </template> -->
     </el-table>
     <slider v-if="showSlider" :columns="columns" @checkedColumnsChange="sliderCheckedColumnsChange"></slider>
   </el-card>
