@@ -1,20 +1,9 @@
 <template>
   <el-select v-bind="$attrs" v-model="selectData" @change="onChange">
     <template #header v-if="showSelectAll && $attrs.multiple">
-      <el-checkbox
-        v-model="checkAll"
-        :indeterminate="indeterminate"
-        @change="handleCheckAll"
-      >
-        全部
-      </el-checkbox>
+      <el-checkbox v-model="checkAll" :indeterminate="indeterminate" @change="handleCheckAll">全部</el-checkbox>
     </template>
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-    ></el-option>
+    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
   </el-select>
 </template>
 
@@ -25,8 +14,8 @@ const props = defineProps({
   options: Array as PropType<Option[]>,
   showSelectAll: {
     type: Boolean,
-    default: true,
-  },
+    default: true
+  }
 })
 let selectData = defineModel()
 

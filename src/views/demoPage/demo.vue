@@ -47,29 +47,31 @@
 <script lang="ts" setup name="Demo1">
 import { ref, reactive } from 'vue'
 import GlForm from '@feature/gl-form/index.vue'
-// import GlSelect from '@feature/gl-select/index.vue'
+import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 // form 配置
 const formData = ref<object>({
   name: '222',
-  classfly1: ['a']
+  classfly1: ['a'],
+  gender: 'man'
 })
 const formItems: ItemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
-    type: 'select',
     label: '性别',
     prop: 'gender',
+    component: DataDict,
     attrs: {
       placeholder: '请选择性别',
       clearable: true,
-      span: 6,
-      options: [
-        { label: '男', value: 'man' },
-        { label: '女', value: 'feman' }
-      ]
+      url: '/mock/getSelectData',
+      span: 6
+      // options: [
+      //   { label: '男', value: 'man' },
+      //   { label: '女', value: 'feman' }
+      // ]
     },
     linstener: {
       change(val: any) {

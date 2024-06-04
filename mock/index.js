@@ -6,6 +6,8 @@ const app = express()
 const adminJson = require('./data/admin.json')
 const tableJson = require('./data/table_data.json')
 const permissionJson = require('./data/permission.json')
+const select = require('./data/select.json')
+
 const translateJson = require('./data/translate.json')
 
 const { checkToken } = require('./utils');
@@ -21,6 +23,10 @@ app.post('/mock/login',(req,res)=>{
 app.use(checkToken);
 app.get('/mock/getPermission',(req,res)=>{
   res.send(permissionJson)
+})
+// 下拉数据
+app.get('/mock/getSelectData',(req,res)=>{
+  res.send(select)
 })
 
 app.post('/mock/tableInfo',(req,res)=>{

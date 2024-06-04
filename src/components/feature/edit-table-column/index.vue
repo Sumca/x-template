@@ -49,7 +49,7 @@ const props = defineProps({
 // 动态匹配组件
 const getComponent = (column: ColumnProp) => {
   const type = column.type
-  return getComponentByType(type)
+  return column.component || getComponentByType(type)
 }
 // 校验
 const errorMessages = reactive({})
