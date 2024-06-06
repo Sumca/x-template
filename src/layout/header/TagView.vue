@@ -44,7 +44,7 @@ watch(
     const tag = {
       name: newRoute.name as string,
       title: newRoute.meta.title as string,
-      path: newRoute.path,
+      path: newRoute.path
       // fullPath: newRoute.fullPath,
       // affix: newRoute.meta?.affix,
       // keepAlive: newRoute.meta?.keepAlive,
@@ -78,8 +78,6 @@ const handleRefresh = () => {
 </script>
 
 <style lang="scss" scoped>
-.tag-view {
-}
 .tag-item {
   margin-right: 5px;
   cursor: pointer;

@@ -18,6 +18,9 @@ interface ColumnProp {
   prop: string
   label?:string
   width?:string
+  iconName?: string,
+  iconAttrs?:object,
+  fontStyle?:object,
   editable?:boolean
   type?:string
   attrs?:object

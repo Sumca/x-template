@@ -51,6 +51,7 @@ import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
+import { ElSwitch } from 'element-plus'
 // form 配置
 const formData = ref<object>({
   name: '222',
@@ -130,7 +131,25 @@ const onReset = useDebounceFn(async () => {
 }, 200)
 // 表格列配置
 const columns: ColumnProp[] = [
-  { label: '姓名', prop: 'name', width: '100' },
+  {
+    label: '姓名',
+    iconName: 'Edit',
+    iconAttrs: { color: '#f534B1' },
+    fontStyle: { padding: '0 4px' },
+    prop: 'name',
+    width: '100'
+  },
+  {
+    type: 'switch',
+    label: '状态',
+    prop: 'status',
+    editable: true,
+    attrs: {
+      activeValue: '1',
+      inactiveValue: '0'
+    },
+    width: '100'
+  },
   {
     label: '年龄',
     prop: 'age',

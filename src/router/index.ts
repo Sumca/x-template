@@ -15,7 +15,7 @@ const constantRouters: RouteRecordRaw[] = [
   },
   {
     path: "/login",
-    component: import('@/views/login/index.vue')
+    component: ()=> import('@/views/login/index.vue')
   },
 ];
 // const asyncRouters = await filterRoutesByPermission() // 异步的路由

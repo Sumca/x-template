@@ -2,11 +2,11 @@
   "code": "200",
   "msg": "success",
   "data": [
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"man", "address": "No. 189, Grove St, Los Angeles"},
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"man", "address": "No. 189, Grove St, Los Angeles"},
-    { "name": "Tom","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"}
+    { "name": "Tom","status": "1","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
+    { "name": "Tom","status": "0","age": "18","date":"2016-05-02","gender":"man", "address": "No. 189, Grove St, Los Angeles"},
+    { "name": "Tom","status": "0","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
+    { "name": "Tom","status": "1","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"},
+    { "name": "Tom","status": "0","age": "18","date":"2016-05-02","gender":"man", "address": "No. 189, Grove St, Los Angeles"},
+    { "name": "Tom","status": "1","age": "18","date":"2016-05-02","gender":"feman", "address": "No. 189, Grove St, Los Angeles"}
   ]
 }

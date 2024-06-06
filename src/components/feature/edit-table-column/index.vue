@@ -15,15 +15,20 @@
       </span>
     </template>
     <template v-else #default="{ row }">
-      <div>
-        {{ column.labelRender ? column.labelRender() : row[column.prop] }}
+      <div class="render-cell">
+        <el-icon>
+          <component :is="column.iconName" v-bind="{ ...column.iconAttrs }" />
+        </el-icon>
+        <span :style="column.fontStyle">
+          {{ column.labelRender ? column.labelRender() : row[column.prop] }}
+        </span>
       </div>
     </template>
   </el-table-column>
 </template>
 
 <script lang="ts" setup name="EditTableColumn">
-import { ref, reactive, PropType, computed } from 'vue'
+import { ref, reactive, markRaw, computed } from 'vue'
 import { getComponentByType } from './config/factory'
 import { useValidate } from './config/validate'
 
@@ -49,7 +54,8 @@ const props = defineProps({
 // 动态匹配组件
 const getComponent = (column: ColumnProp) => {
   const type = column.type
-  return column.component || getComponentByType(type)
+  if (column.component) return markRaw(column.component)
+  return getComponentByType(type)
 }
 // 校验
 const errorMessages = reactive({})
@@ -73,5 +79,9 @@ defineExpose({ clearValidate })
 .error-msg {
   color: #f00;
   font-size: 12px;
+}
+.render-cell {
+  display: flex;
+  align-items: center;
 }
 </style>

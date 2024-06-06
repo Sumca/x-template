@@ -15,22 +15,11 @@
       <!-- 内容区的主体，用于数据展示 -->
       <el-main class="content">
         <!-- <router-view></router-view> -->
-        <router-view
-          v-slot="{ Component, route }"
-          v-if="tagsStore.refreshTagStatus"
-        >
+        <router-view v-slot="{ Component, route }" v-if="tagsStore.refreshTagStatus">
           <keep-alive>
-            <component
-              v-if="route.meta.keepAlive"
-              :is="Component"
-              :key="route.name"
-            />
+            <component v-if="route.meta.keepAlive" :is="Component" :key="route.name" />
           </keep-alive>
-          <component
-            v-if="!route.meta.keepAlive"
-            :is="Component"
-            :key="route.name"
-          />
+          <component v-if="!route.meta.keepAlive" :is="Component" :key="route.name" />
         </router-view>
       </el-main>
     </el-container>
