@@ -4,8 +4,10 @@
     <div>
       <gl-form
         title="查询条件"
+        ref="formRef"
         v-model="formData"
-        :form-items="formItems"
+        :rules="rules"
+        :form-items="showFormItems"
         @submit="onSubmit"
         @reset="onReset"
       ></gl-form>
@@ -23,7 +25,7 @@
       >
         <template #buttton>
           <!-- 权限按钮 -->
-          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd" slot="add"></el-button>
+          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd">新增</el-button>
           <el-button type="info" @click="onSave">保存</el-button>
           <el-button type="danger" v-permission="'Demo1.delete'" v-debounce="onDelete">删除</el-button>
         </template>
@@ -44,7 +46,7 @@
 </template>
 
 <script lang="ts" setup name="Demo1">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import GlForm from '@feature/gl-form/index.vue'
 import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
@@ -53,12 +55,14 @@ import SelectDialog from './components/selectDialog.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 import { ElMessage } from 'element-plus'
+
 // form 配置
 const formData = ref<object>({
   name: '222',
   classfly1: ['a'],
   gender: 'man'
 })
+// 表单配置项
 const formItems: ItemProp[] = [
   { type: 'input', label: '名字', prop: 'name', span: 6 },
   {
@@ -117,15 +121,60 @@ const formItems: ItemProp[] = [
     span: 6,
     attrs: { type: 'textarea' }
   },
-  { component: SelectDialog, label: '按钮弹窗', attrs: { btnName: '按钮1' }, prop: 'btn', span: 6 },
+  {
+    component: SelectDialog,
+    label: '按钮弹窗',
+    attrs: { btnName: '按钮1' },
+    prop: 'btn',
+    span: 6,
+    linstener: {
+      confirm(list: []) {
+        onAddFormItems(list)
+      }
+    }
+  },
   { type: 'input', label: '电话', prop: 'phone', span: 6 }
 ]
+// 表单验证规则
+const rules = reactive({
+  phone: [{ required: true, message: 'Please input 电话', trigger: 'change' }],
+  a: [{ required: true, message: 'Please input a', trigger: 'change' }],
+  b: [{ required: true, message: 'Please input b', trigger: 'blur' }],
+  c: [{ required: true, message: 'Please input c', trigger: 'blur' }],
+  d: [{ required: true, message: 'Please input d', trigger: 'blur' }]
+})
+const addFormItems = ref<ItemProp[]>([])
+// 添加form-items
+const onAddFormItems = (arr: []) => {
+  const newItems = arr.map((item) => {
+    return {
+      type: 'input',
+      label: item,
+      prop: item,
+      span: 6
+    }
+  })
+  addFormItems.value = newItems
+}
+// 计算显示的items
+const showFormItems = computed(() => {
+  return formItems.concat(addFormItems.value)
+})
+//
+const formRef = ref()
 // 查询
 let tableData = ref<object[]>([])
-const onSubmit = async () => {
-  const params = { ...formData.value, pagenum: 1, pagesize: 22 }
-  const { data } = (await getTableDataApi(params)) as any
-  tableData.value = data
+const onSubmit = () => {
+  formRef.value
+    .validate()
+    .then(async () => {
+      const params = { ...formData.value, pagenum: 1, pagesize: 22 }
+      const { data } = (await getTableDataApi(params)) as any
+      tableData.value = data
+    })
+    .catch((err: any) => {
+      console.log(err)
+    })
 }
 // 清空
 const onReset = useDebounceFn(async () => {
