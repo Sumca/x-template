@@ -23,7 +23,7 @@
       >
         <template #buttton>
           <!-- 权限按钮 -->
-          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd">新增</el-button>
+          <el-button type="success" v-permission="'Demo1.add'" @click="onAdd" slot="add"></el-button>
           <el-button type="info" @click="onSave">保存</el-button>
           <el-button type="danger" v-permission="'Demo1.delete'" v-debounce="onDelete">删除</el-button>
         </template>
@@ -48,6 +48,8 @@ import { ref, reactive } from 'vue'
 import GlForm from '@feature/gl-form/index.vue'
 import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
+import SelectDialog from './components/selectDialog.vue'
+
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
 import { ElMessage } from 'element-plus'
@@ -115,6 +117,7 @@ const formItems: ItemProp[] = [
     span: 6,
     attrs: { type: 'textarea' }
   },
+  { component: SelectDialog, label: '按钮弹窗', attrs: { btnName: '按钮1' }, prop: 'btn', span: 6 },
   { type: 'input', label: '电话', prop: 'phone', span: 6 }
 ]
 // 查询
