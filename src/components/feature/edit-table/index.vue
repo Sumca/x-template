@@ -68,29 +68,30 @@ const sliderCheckedColumnsChange = (checkedArr: string[]) => {
 // 获取到el-table的方法，然后 defineExpose 将el-table的方法暴露出去
 const elTableMethods = ref({})
 const table = ref<InstanceType<typeof ElTable>>()
+
 onMounted(() => {
   const refMethods = Object.entries(table.value as object).filter(([_, value]) => value instanceof Function)
   refMethods.forEach(([key, value]) => {
     elTableMethods.value[key] = value
   })
 })
-// clearValidate
 const editTableColumns = ref()
+// clearValidate
 const clearValidate = () => {
-  editTableColumns.value?.forEach((item: any) => {
-    item.clearValidate()
+  editTableColumns?.value?.forEach((item: any) => {
+    item?.clearValidate()
   })
 }
 elTableMethods.value['clearValidate'] = clearValidate
-//
-const onRowEdit = (val: object) => {
-  emit('row-edit', val)
-}
 // 查询清空校验
 watch(
   () => props.data,
   () => clearValidate()
 )
+//
+const onRowEdit = (val: object) => {
+  emit('row-edit', val)
+}
 
 defineExpose(elTableMethods.value)
 </script>

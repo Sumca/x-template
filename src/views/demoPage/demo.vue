@@ -20,7 +20,6 @@
         :is-selection="true"
         :columns="columns"
         :data="tableData"
-        @row-edit="onRowEdit"
       >
         <template #buttton>
           <!-- 权限按钮 -->
@@ -51,7 +50,7 @@ import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
-import { ElSwitch } from 'element-plus'
+// import { ElSwitch } from 'element-plus'
 // form 配置
 const formData = ref<object>({
   name: '222',
@@ -64,11 +63,11 @@ const formItems: ItemProp[] = [
     label: '性别',
     prop: 'gender',
     component: DataDict,
+    span: 6,
     attrs: {
       placeholder: '请选择性别',
       clearable: true,
-      url: '/mock/getSelectData',
-      span: 6
+      url: '/mock/getSelectData'
       // options: [
       //   { label: '男', value: 'man' },
       //   { label: '女', value: 'feman' }
@@ -84,12 +83,12 @@ const formItems: ItemProp[] = [
     type: 'select',
     label: '类别',
     prop: 'classfly1',
+    span: 6,
     attrs: {
       placeholder: '请选择类别',
       clearable: true,
       multiple: true,
       collapseTags: true,
-      span: 6,
       options: [
         { label: 'a', value: 'a' },
         { label: 'b', value: 'b' },
@@ -107,13 +106,13 @@ const formItems: ItemProp[] = [
     label: '日期',
     prop: 'date',
     span: 6,
-    attrs: { placeholder: '选择日期' }
+    attrs: { placeholder: '选择日期1' }
   },
   {
     type: 'input',
     label: '地址',
     prop: 'adress',
-    span: 12,
+    span: 6,
     attrs: { type: 'textarea' }
   },
   { type: 'input', label: '电话', prop: 'phone', span: 6 }
@@ -155,7 +154,10 @@ const columns: ColumnProp[] = [
     prop: 'age',
     width: '100',
     editable: true,
-    rules: [{ required: true, message: '年龄不能为空' }],
+    rules: [
+      { required: true, message: '年龄不能为空' },
+      { pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, message: '年龄只能是正整数或者最多两位小数的数字' }
+    ],
     linstener: {
       change(val: string) {
         console.log(val)
