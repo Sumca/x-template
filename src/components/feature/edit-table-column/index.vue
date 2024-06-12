@@ -10,8 +10,8 @@
         @input="(value: ValProp) => onValidate(value, row, $index)"
         @change="(value: ValProp) => onValidate(value, row, $index)"
       />
-      <span v-if="errorMessages[column.prop + $index]" class="error-msg">
-        {{ errorMessages[column.prop + $index] }}
+      <span v-if="errorMessages[column.prop + '_' + $index]" class="error-msg">
+        {{ errorMessages[column.prop + '_' + $index] }}
       </span>
     </template>
     <template v-else #default="{ row }">
@@ -64,7 +64,11 @@ const onValidate = (val: ValProp, row: object, idx: number) => {
   emit('edit', { value: val, row, column: props.column })
   if (!props.column.rules) return
   const error = useValidate(val, row, props.column.rules)
-  errorMessages[props.column.prop + idx] = error
+  if (error) {
+    errorMessages[props.column.prop + '_' + idx] = error
+  } else {
+    delete errorMessages[props.column.prop + '_' + idx]
+  }
 }
 // clearValidate
 const clearValidate = () => {
@@ -72,7 +76,18 @@ const clearValidate = () => {
     delete errorMessages[key]
   }
 }
-defineExpose({ clearValidate })
+const validate = () => {
+  return new Promise((resolve, reject) => {
+    for (const key in errorMessages) {
+      if (errorMessages[key]) {
+        const num = Number(key.split('_')[1]) + 1
+        reject({ message: `${props.column.label}第${num}行:${errorMessages[key]}` })
+      }
+    }
+    resolve({})
+  })
+}
+defineExpose({ clearValidate, validate })
 //
 </script>
 <style lang="scss" scoped>

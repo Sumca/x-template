@@ -83,6 +83,14 @@ const clearValidate = () => {
   })
 }
 elTableMethods.value['clearValidate'] = clearValidate
+
+// validate
+const validate = () => {
+  const promiseList = editTableColumns?.value.map((item: any) => item.validate())
+  return Promise.all(promiseList)
+}
+elTableMethods.value['validate'] = validate
+
 // 查询清空校验
 watch(
   () => props.data,

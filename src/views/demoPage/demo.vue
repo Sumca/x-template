@@ -50,7 +50,7 @@ import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
-// import { ElSwitch } from 'element-plus'
+import { ElMessage } from 'element-plus'
 // form 配置
 const formData = ref<object>({
   name: '222',
@@ -139,6 +139,14 @@ const columns: ColumnProp[] = [
     width: '100'
   },
   {
+    label: '数量',
+    prop: 'count',
+    type: 'number',
+    editable: true,
+    attrs: { max: 10, min: 1 },
+    width: '160'
+  },
+  {
     type: 'switch',
     label: '状态',
     prop: 'status',
@@ -158,6 +166,7 @@ const columns: ColumnProp[] = [
       { required: true, message: '年龄不能为空' },
       { pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, message: '年龄只能是正整数或者最多两位小数的数字' }
     ],
+    attrs: { maxlength: 4 },
     linstener: {
       change(val: string) {
         console.log(val)
@@ -215,7 +224,14 @@ const onAdd = () => {
 }
 // 保存
 const onSave = () => {
-  console.log('onSave: tableData', tableData.value)
+  editTable.value
+    .validate()
+    .then(() => {
+      ElMessage.success('校验通过,发送请求')
+    })
+    .catch((err: any) => {
+      ElMessage.error('校验不通过,' + err?.message)
+    })
 }
 // 删除
 const onDelete = () => {
