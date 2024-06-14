@@ -3,7 +3,12 @@
     <template #header v-if="showSelectAll && $attrs.multiple">
       <el-checkbox v-model="checkAll" :indeterminate="indeterminate" @change="handleCheckAll">全部</el-checkbox>
     </template>
-    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+    <el-option
+      v-for="item in options"
+      :key="item[valueFiled]"
+      :label="item[labelFiled]"
+      :value="item[valueFiled]"
+    ></el-option>
   </el-select>
 </template>
 
@@ -12,6 +17,16 @@ import { ref, PropType, watch } from 'vue'
 const emit = defineEmits(['change'])
 const props = defineProps({
   options: Array as PropType<Option[]>,
+  labelFiled: {
+    type: String,
+    default: 'label',
+    coment: '选项显示的键名'
+  },
+  valueFiled: {
+    type: String,
+    default: 'value',
+    coment: '选项绑定值的键名'
+  },
   showSelectAll: {
     type: Boolean,
     default: true
