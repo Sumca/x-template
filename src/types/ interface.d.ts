@@ -1,3 +1,4 @@
+
 interface ColumItem {
   type: string
   label: string
@@ -20,15 +21,15 @@ interface ColumnProp {
   width?:string
   iconName?: string,
   iconAttrs?:object,
-  fontStyle?:object,
-  editable?:boolean
+  fontStyle?:any,
+  editable?:boolean|Function
   type?:string
   attrs?:object
   component?:object
   rules?: object[]
   linstener?:object|Function|null
   listeners?: object|Function|null
-  labelRender?:object|Function|null
+  labelRender?:Function|null
 }
 interface Option {
   value: string|number|undefined|null

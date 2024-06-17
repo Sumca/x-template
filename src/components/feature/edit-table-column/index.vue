@@ -1,21 +1,22 @@
 <template>
   <el-table-column :prop="column.prop" :label="column.label" :width="column.width">
-    <template v-if="column.editable" #default="{ row, $index }">
-      <component
-        :is="getComponent(column)"
-        v-model="row[column.prop]"
-        v-bind="column.attrs"
-        v-on="{ ...column.linstener }"
-        :column="column"
-        @input="(value: ValProp) => onValidate(value, row, $index)"
-        @change="(value: ValProp) => onValidate(value, row, $index)"
-      />
-      <span v-if="errorMessages[column.prop + '_' + $index]" class="error-msg">
-        {{ errorMessages[column.prop + '_' + $index] }}
-      </span>
-    </template>
-    <template v-else #default="{ row }">
-      <div class="render-cell">
+    <template #default="{ row, $index }">
+      <div v-if="isEditable(column, row)">
+        <component
+          :is="getComponent(column)"
+          v-model="row[column.prop]"
+          v-bind="column.attrs"
+          :rowData="row"
+          v-on="{ ...column.linstener }"
+          :column="column"
+          @input="(value: ValProp) => onValidate(value, row, $index)"
+          @change="(value: ValProp) => onValidate(value, row, $index)"
+        />
+        <span v-if="errorMessages[column.prop + '_' + $index]" class="error-msg">
+          {{ errorMessages[column.prop + '_' + $index] }}
+        </span>
+      </div>
+      <div v-else class="render-cell">
         <el-icon>
           <component :is="column.iconName" v-bind="{ ...column.iconAttrs }" />
         </el-icon>
@@ -31,6 +32,7 @@
 import { ref, reactive, markRaw, computed } from 'vue'
 import { getComponentByType } from './config/factory'
 import { useValidate } from './config/validate'
+import type { StyleValue } from 'vue'
 
 const emit = defineEmits(['edit'])
 const props = defineProps({
@@ -56,6 +58,13 @@ const getComponent = (column: ColumnProp) => {
   const type = column.type
   if (column.component) return markRaw(column.component)
   return getComponentByType(type)
+}
+// 编辑状态
+const isEditable = (column: ColumnProp, row: object): boolean => {
+  if (typeof column.editable === 'function') {
+    return column.editable(row)
+  }
+  return !!column.editable
 }
 // 校验
 const errorMessages = reactive({})

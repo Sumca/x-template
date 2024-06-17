@@ -213,7 +213,11 @@ const columns: ColumnProp[] = [
     label: '年龄',
     prop: 'age',
     width: '100',
-    editable: true,
+    editable: (row: any) => {
+      // 可以根据row中的数据动态控制editable，也可以直接editable: true/false
+      if (row.count === 1 && row.status === '0') return true
+      return false
+    },
     rules: [
       { required: true, message: '年龄不能为空' },
       { pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, message: '年龄只能是正整数或者最多两位小数的数字' }
