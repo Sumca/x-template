@@ -234,7 +234,11 @@ const columns: ColumnProp[] = [
     prop: 'email',
     editable: true,
     width: '200',
-    attrs: { disabled: true }
+    attrs: {
+      disabled: (row: any) => {
+        return row.count === 4
+      }
+    }
   },
   {
     label: '性别',

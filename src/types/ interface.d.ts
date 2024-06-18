@@ -24,7 +24,10 @@ interface ColumnProp {
   fontStyle?:any,
   editable?:boolean|Function
   type?:string
-  attrs?:object
+  attrs?:{ 
+    disabled?:boolean|Function
+    [prop:string]:any
+  }
   component?:object
   rules?: object[]
   linstener?:object|Function|null

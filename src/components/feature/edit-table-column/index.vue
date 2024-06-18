@@ -9,6 +9,7 @@
           :rowData="row"
           v-on="{ ...column.linstener }"
           :column="column"
+          :disabled="isDisabled(column, row)"
           @input="(value: ValProp) => onValidate(value, row, $index)"
           @change="(value: ValProp) => onValidate(value, row, $index)"
         />
@@ -65,6 +66,13 @@ const isEditable = (column: ColumnProp, row: object): boolean => {
     return column.editable(row)
   }
   return !!column.editable
+}
+//Disabled状态
+const isDisabled = (column: ColumnProp, row: object): boolean => {
+  if (typeof column?.attrs?.disabled === 'function') {
+    return column?.attrs?.disabled(row)
+  }
+  return !!column?.attrs?.disabled
 }
 // 校验
 const errorMessages = reactive({})
