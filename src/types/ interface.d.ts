@@ -19,13 +19,13 @@ interface ColumnProp {
   prop: string
   label?:string
   width?:string
-  iconName?: string,
-  iconAttrs?:object,
-  fontStyle?:any,
-  editable?:boolean|Function
+  iconName?: string
+  iconAttrs?:object
+  fontStyle?:any
+  editable?:boolean|((...args: any[]) => boolean)
   type?:string
   attrs?:{ 
-    disabled?:boolean|Function
+    disabled?:boolean|((...args: any[]) => boolean)
     [prop:string]:any
   }
   component?:object
@@ -44,7 +44,7 @@ interface SquareConfig {
 }
 
 interface TagsViewItemProp {
-  name:string,
-  title:string,
-  path:string,
+  name:string
+  title:string
+  path:string
 }
