@@ -1,5 +1,5 @@
 <template>
-  <el-select v-bind="$attrs" v-model="selectData" @change="onChange">
+  <el-select v-bind="$attrs" :value-key="idFiled" v-model="selectData" @change="onChange">
     <template #header v-if="showSelectAll && $attrs.multiple">
       <el-checkbox v-model="checkAll" :indeterminate="indeterminate" @change="handleCheckAll">全部</el-checkbox>
     </template>
@@ -29,6 +29,11 @@ const props = defineProps({
     type: String,
     default: 'value',
     coment: '选项绑定值的键名'
+  },
+  idFiled: {
+    type: String,
+    default: 'id',
+    coment: '选项绑定对象时需要指定value-key'
   },
   valueType: {
     type: String as PropType<ValueTypeProp>,

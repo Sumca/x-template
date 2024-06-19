@@ -60,6 +60,16 @@ import { ElMessage } from 'element-plus'
 const formData = ref<object>({
   name: '222',
   classfly1: [{ label: 'b', value: 'b' }],
+  storId: {
+    id: 1,
+    CompId: 'C0001',
+    BrandId: 'B0002',
+    FactId: 'F6000',
+    FactName: '厚裕工厂',
+    StorId: 'S1001',
+    StorName: '成品仓',
+    FreezeMark: false
+  },
   gender: 'man'
 })
 // 表单配置项
@@ -99,6 +109,7 @@ const formItems: ItemProp[] = [
       multiple: true,
       collapseTags: true,
       valueType: 'object',
+      idFiled: 'value',
       options: [
         { label: 'a', value: 'a' },
         { label: 'b', value: 'b' },
@@ -109,6 +120,73 @@ const formItems: ItemProp[] = [
       change(val: any) {
         console.log('类别: ', val)
       }
+    }
+  },
+  {
+    type: 'select',
+    label: '销售仓库',
+    prop: 'storId',
+    span: 6,
+    attrs: {
+      placeholder: '请选择销售仓库',
+      labelFiled: (option: any) => {
+        return option.FactName + '_' + option.StorName
+      },
+      clearable: true,
+      valueType: 'object',
+      idFiled: 'id',
+      options: [
+        {
+          id: 1,
+          CompId: 'C0001',
+          BrandId: 'B0002',
+          FactId: 'F6000',
+          FactName: '厚裕工厂',
+          StorId: 'S1001',
+          StorName: '成品仓',
+          FreezeMark: false
+        },
+        {
+          id: 2,
+          CompId: 'C0001',
+          BrandId: 'B0002',
+          FactId: 'F6000',
+          FactName: '厚裕工厂',
+          StorId: 'S2001',
+          StorName: '面料仓',
+          FreezeMark: true
+        },
+        {
+          id: 3,
+          CompId: 'C0001',
+          BrandId: 'B0002',
+          FactId: 'F6000',
+          FactName: '厚裕工厂',
+          StorId: 'Stest',
+          StorName: '测试编辑仓',
+          FreezeMark: false
+        },
+        {
+          id: 4,
+          CompId: 'C0001',
+          BrandId: 'B0002',
+          FactId: 'FCTES',
+          FactName: '测试辑',
+          StorId: 'S2001',
+          StorName: '面料仓',
+          FreezeMark: false
+        },
+        {
+          id: 5,
+          CompId: 'C0001',
+          BrandId: 'B0002',
+          FactId: 'FCTES',
+          FactName: '测试辑',
+          StorId: 'Stest',
+          StorName: '测试编辑仓',
+          FreezeMark: false
+        }
+      ]
     }
   },
   {
