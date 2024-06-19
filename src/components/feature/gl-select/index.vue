@@ -6,19 +6,22 @@
     <el-option
       v-for="item in options"
       :key="item[valueFiled]"
-      :label="item[labelFiled]"
-      :value="item[valueFiled]"
+      :label="getItemLabel(item)"
+      :value="getItemValue(item)"
     ></el-option>
   </el-select>
 </template>
 
 <script lang="ts" setup name="GlSelect">
 import { ref, PropType, watch } from 'vue'
+type ValueTypeProp = 'string' | 'object'
+type LabelFieldType = string | ((val: Option) => string)
+
 const emit = defineEmits(['change'])
 const props = defineProps({
   options: Array as PropType<Option[]>,
   labelFiled: {
-    type: String,
+    type: [String, Function] as PropType<LabelFieldType>,
     default: 'label',
     coment: '选项显示的键名'
   },
@@ -26,6 +29,11 @@ const props = defineProps({
     type: String,
     default: 'value',
     coment: '选项绑定值的键名'
+  },
+  valueType: {
+    type: String as PropType<ValueTypeProp>,
+    default: 'string',
+    coment: '返回值的对象类型：string/object'
   },
   showSelectAll: {
     type: Boolean,
@@ -67,9 +75,22 @@ watch(
 const onChange = (val: string | Option[]) => {
   emit('change', val)
 }
+// 获取value绑定的值（value或者object）
+const getItemValue = (option: Option) => {
+  if (props.valueType === 'object') return option
+  return option[props.valueFiled]
+}
+//
+const getItemLabel = (option: Option): string => {
+  if (typeof props.labelFiled === 'function') {
+    return props.labelFiled(option)
+  }
+  return option[props.labelFiled]
+}
 const handleCheckAll = (val: Option) => {
-  // indeterminate.value = false
-  const newVal = val ? props?.options?.map((_) => _.value) : []
+  const newVal = val
+    ? props?.options?.map((option) => (props.valueType === 'object' ? option : option[props.valueFiled]))
+    : []
   selectData.value = newVal
   emit('change', newVal)
 }

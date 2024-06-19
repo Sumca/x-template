@@ -59,7 +59,7 @@ import { ElMessage } from 'element-plus'
 // form 配置
 const formData = ref<object>({
   name: '222',
-  classfly1: ['a'],
+  classfly1: [{ label: 'b', value: 'b' }],
   gender: 'man'
 })
 // 表单配置项
@@ -95,6 +95,7 @@ const formItems: ItemProp[] = [
       clearable: true,
       multiple: true,
       collapseTags: true,
+      valueType: 'object',
       options: [
         { label: 'a', value: 'a' },
         { label: 'b', value: 'b' },
