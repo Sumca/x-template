@@ -92,6 +92,9 @@ const formItems: ItemProp[] = [
     span: 6,
     attrs: {
       placeholder: '请选择类别',
+      labelFiled: (option: any) => {
+        return '类别' + option.label
+      },
       clearable: true,
       multiple: true,
       collapseTags: true,
