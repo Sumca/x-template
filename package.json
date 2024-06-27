@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "7.10.0",
     "@typescript-eslint/parser": "7.10.0",
     "@vue/compiler-sfc": "^3.0.4",
-    "eslint": "9.x",
+    "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.26.0",
     "globals": "^15.3.0",
     "mockjs": "^1.1.0",
