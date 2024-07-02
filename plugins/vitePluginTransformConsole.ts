@@ -8,6 +8,10 @@ export default function transformConsolePlugin(): Plugin {
     name: 'transform-console', // 插件名称
     enforce: 'pre', // 在其他插件之前执行
     transform(code, id) {
+      // 检查当前是否为开发模式
+      if (process.env.NODE_ENV !== 'development') {
+        return;
+      }
       // 只处理 views 目录下的 JavaScript/TypeScript 文件
       if (!id.includes('/views/') || !/\.(js|ts|jsx|tsx|vue)$/.test(id)) {
         return;
