@@ -6,3 +6,7 @@ declare module '*.vue' {
     const componentOptions: ComponentOptions;
     export default componentOptions; */
 }
+declare module '*.gltf' {
+const value: string;
+export default value;
+}

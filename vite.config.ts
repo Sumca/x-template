@@ -4,8 +4,8 @@ import { defineConfig, UserConfig,loadEnv } from 'vite'
 import { createHtmlPlugin } from "vite-plugin-html";
 import VueSetuoExtend from 'vite-plugin-vue-setup-extend'
 import viteCompression from 'vite-plugin-compression'
+import gltf from 'vite-plugin-gltf'
 import transformConsolePlugin from './plugins/vitePluginTransformConsole'
-
 import vue from '@vitejs/plugin-vue'
 
 // ./src和src均可以，path模块会自行处理； __dirname始终返回的是当前文件所在的目录
@@ -23,6 +23,7 @@ const getViteEnv = (mode, target) => {
     vue(),
     VueSetuoExtend(),
     viteCompression(), // 开启gzip压缩插件
+    gltf(),
     transformConsolePlugin(),
     createHtmlPlugin({
       inject: {
