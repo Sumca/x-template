@@ -30,7 +30,7 @@ const scene = new Scene() // 场景
 
 // scene.add(car)
 // 相机 PerspectiveCamera（透视摄像机）
-const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
+const camera = new PerspectiveCamera(45, 3 / 2, 0.1, 1000)
 camera.position.set(20, 20, 30)
 camera.lookAt(scene.position)
 
