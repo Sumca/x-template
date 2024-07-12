@@ -3,13 +3,13 @@
 import { readFileSync } from 'fs';
 import { Plugin } from 'vite';
 
-export default function transformConsolePlugin(): Plugin {
+export default function transformConsolePlugin(mode): Plugin {
   return {
     name: 'transform-console', // 插件名称
     enforce: 'pre', // 在其他插件之前执行
     transform(code, id) {
       // 检查当前是否为开发模式
-      if (process.env.NODE_ENV !== 'development') {
+      if (mode !== 'development') {
         return;
       }
       // 只处理 views 目录下的 JavaScript/TypeScript 文件

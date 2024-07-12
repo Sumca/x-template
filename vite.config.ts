@@ -24,7 +24,7 @@ const getViteEnv = (mode, target) => {
     VueSetuoExtend(),
     viteCompression(), // 开启gzip压缩插件
     gltf(),
-    transformConsolePlugin(),
+    transformConsolePlugin(mode),
     createHtmlPlugin({
       inject: {
         data: {
