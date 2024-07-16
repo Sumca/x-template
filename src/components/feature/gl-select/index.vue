@@ -94,7 +94,7 @@ const getItemLabel = (option: Option): string => {
 }
 const handleCheckAll = (val: Option) => {
   const newVal = val
-    ? props?.options?.map((option) => (props.valueType === 'object' ? option : option[props.valueFiled]))
+    ? props?.options?.map((option: Option) => (props.valueType === 'object' ? option : option[props.valueFiled]))
     : []
   selectData.value = newVal
   emit('change', newVal)

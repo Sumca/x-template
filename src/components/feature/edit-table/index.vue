@@ -63,7 +63,7 @@ let tableMsg = reactive({ tableColumns: props.columns })
 
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
-  tableMsg.tableColumns = props.columns.filter((item) => checkedArr.includes(item.prop))
+  tableMsg.tableColumns = props.columns.filter((item: ColumnProp) => checkedArr.includes(item.prop))
 }
 // 获取到el-table的方法，然后 defineExpose 将el-table的方法暴露出去
 const elTableMethods = ref({})

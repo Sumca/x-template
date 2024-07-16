@@ -12,14 +12,14 @@
     >
       <template #buttton>
         <el-button v-permission="'Table.export'" @click="onExport">{{ $t('common.export') }}</el-button>
-        <el-button @click="onExport">{{ $t('common.print') }}</el-button>
+        <el-button @click="onPrint">{{ $t('common.print') }}</el-button>
       </template>
     </gl-table>
   </div>
 </template>
 
 <script lang="ts" setup name="Table">
-// import { ref, reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import GlTable from '@feature/gl-table/index.vue'
 import { getTableDataApi } from '@/api/common'
 import { useDownloadExcel } from '@/hooks/useDownloadXlsx' // vueuse 工具集
@@ -27,8 +27,9 @@ import { useDownloadExcel } from '@/hooks/useDownloadXlsx' // vueuse 工具集
 const onExport = () => {
   useDownloadExcel('table', '测试表格名')
 }
+
 // 表头数据
-const columns: ColumnProp[] = [
+const columns = ref<ColumnProp[]>([
   { label: '姓名', prop: 'name' },
   { label: '年龄', prop: 'age' },
   {
@@ -47,6 +48,12 @@ const columns: ColumnProp[] = [
   },
   { label: '日期', prop: 'date' },
   { label: '地址', prop: 'address' }
-]
-console.log(columns)
+])
+console.log(columns.value)
+const onPrint = () => {
+  columns.value = [
+    { label: '姓名', prop: 'name' },
+    { label: '年龄', prop: 'age' }
+  ]
+}
 </script>

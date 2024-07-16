@@ -67,7 +67,7 @@ const props = defineProps({
     default: () => {
       return {
         pageSizes: [100, 200, 300, 400],
-        small: true,
+        size: 'small',
         disabled: false,
         background: true,
         layout: 'total, sizes, prev, pager, next, jumper'
@@ -118,7 +118,7 @@ watchEffect(() => {
 })
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
-  tableColumns.value = props.columns.filter((item) => checkedArr.includes(item.prop))
+  tableColumns.value = props.columns.filter((item: ColumnProp) => checkedArr.includes(item.prop))
 }
 
 // page
