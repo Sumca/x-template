@@ -263,7 +263,7 @@ const onReset = useDebounceFn(async () => {
   formData.value = {}
 }, 200)
 // 表格列配置
-const columns: ColumnProp[] = [
+const columns = ref<ColumnProp[]>([
   {
     label: '姓名',
     iconName: 'Edit',
@@ -353,7 +353,7 @@ const columns: ColumnProp[] = [
     }
   },
   { label: '地址', prop: 'address', width: '280' }
-]
+])
 const editTable = ref()
 // 编辑时触发
 const onRowEdit = (value: object) => {
@@ -377,6 +377,17 @@ const onSave = () => {
 }
 // 删除
 const onDelete = () => {
-  console.log('getSelectionRows: ', editTable.value.getSelectionRows())
+  columns.value = [
+    {
+      label: '姓名',
+      iconName: 'Edit',
+      iconAttrs: { color: '#f534B1' },
+      fontStyle: { padding: '0 4px' },
+      prop: 'name',
+      width: '100'
+    }
+  ]
+  console.log(columns.value)
+  // console.log('getSelectionRows: ', editTable.value.getSelectionRows())
 }
 </script>

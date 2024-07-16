@@ -60,7 +60,12 @@ const props = defineProps({
 })
 let tableMsg = reactive({ tableColumns: props.columns })
 // let tableColumns = ref<ColumnProp[]>(props.columns)
-
+watch(
+  () => props.columns,
+  (newVal) => {
+    tableMsg.tableColumns = newVal
+  }
+)
 // slider column 回调
 const sliderCheckedColumnsChange = (checkedArr: string[]) => {
   tableMsg.tableColumns = props.columns.filter((item: ColumnProp) => checkedArr.includes(item.prop))
