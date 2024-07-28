@@ -9,7 +9,7 @@ const systemRoutes: RouteRecordRaw[] = [
     component: Layout,      // 每个路由都需要通过component指定归属的布局组件
     redirect: "/index",
     name: "Root",
-    meta: { title: "首页", icon: "Menu", permissions:['admin'] },
+    meta: { title: "首页", icon: "HomeFilled", permissions:['admin'] },
     children: [
       {
         path: "/index",
@@ -17,7 +17,7 @@ const systemRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/home/home.vue"),
         meta: {
           title: "首页",
-          icon: "Home",
+          // icon: "HomeFilled",
           affix: true,
           keepAlive: true,
           permissions:['admin']
@@ -38,7 +38,7 @@ const systemRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/home/home.vue"),
         meta: {
           title: "菜单管理",
-          icon: "Menu",
+          icon: "MilkTea",
           keepAlive: true,
           permissions:['admin']
         },
@@ -60,7 +60,7 @@ const systemRoutes: RouteRecordRaw[] = [
         // redirect: '/system/chart/line',
         meta: {
           title: "员工管理",
-          icon: "Line",
+          icon: "IceTea",
           keepAlive: true,
           permissions:['admin']
         },

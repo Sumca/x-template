@@ -11,7 +11,7 @@ const demoRoutes: RouteRecordRaw[] = [
     name: "Demo",
     meta: { 
       title: "DEMO", 
-      icon: "Menu", 
+      icon: "CoffeeCup", 
       keepAlive: true,
       permissions:['admin'] 
     },

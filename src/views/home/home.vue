@@ -3,7 +3,14 @@
     <div class="cards">
       <template v-for="item in cards" :key="item.key">
         <div class="card">
-          {{ item.title }}
+          <div class="title">
+            {{ item.title }}
+            <el-icon :size="16" :color="item.iconColor">
+              <component :is="item.icon" />
+            </el-icon>
+          </div>
+          <div class="value">{{ item.value }}</div>
+          <div class="rate">{{ item.rate }}</div>
         </div>
       </template>
     </div>
@@ -45,19 +52,43 @@ import { ref, reactive, PropType, onActivated, onMounted } from 'vue'
 interface card {
   title: string
   key: string
+  value: number
+  rate: string
+  icon?: string
+  iconColor?: string
 }
 const cards: card[] = [
   {
-    title: '111',
-    key: '1'
+    title: '需求人数',
+    key: '1',
+    value: 363,
+    rate: '+20%',
+    icon: 'Watermelon',
+    iconColor: '#409EFF'
   },
   {
-    title: '222',
-    key: '2'
+    title: '提问数量',
+    key: '2',
+    value: 233,
+    rate: '+10%',
+    icon: 'IceTea',
+    iconColor: '#67C23A'
   },
   {
-    title: '333',
-    key: '3'
+    title: '解决数量',
+    key: '3',
+    value: 336,
+    rate: '+23%',
+    icon: 'ForkSpoon',
+    iconColor: '#67C23A'
+  },
+  {
+    title: '用户满意度',
+    key: '4',
+    value: 100,
+    rate: '+100%',
+    icon: 'Apple',
+    iconColor: '#E6A23C'
   }
 ]
 
@@ -77,20 +108,36 @@ onActivated(() => {
   background-color: rgb(30, 30, 63);
   .cards {
     width: 100%;
-    height: 60px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     .card {
+      padding: 10px;
+      box-sizing: border-box;
       background-color: rgb(90, 90, 159);
-      width: 30%;
+      width: 24%;
       color: #fff;
       border-radius: 4px;
+      text-align: left;
+      .title {
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .value {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .rate {
+        font-size: 12px;
+        color: #3ab57e;
+      }
     }
   }
   .home-data {
     margin-top: 10px;
     width: 100%;
-    height: calc(100% - 70px);
+    height: calc(100% - 90px);
     display: flex;
     .slide {
       width: 350px;
