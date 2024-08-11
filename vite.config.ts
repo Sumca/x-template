@@ -7,7 +7,7 @@ import viteCompression from 'vite-plugin-compression'
 import gltf from 'vite-plugin-gltf'
 import transformConsolePlugin from './plugins/vitePluginTransformConsole'
 import vue from '@vitejs/plugin-vue'
-
+import qiankun from 'vite-plugin-qiankun'
 // ./src和src均可以，path模块会自行处理； __dirname始终返回的是当前文件所在的目录
 const srcPath = resolve(__dirname, 'src') 
 //这个配置 为了在html中使用 环境变量
@@ -33,6 +33,7 @@ const getViteEnv = (mode, target) => {
         },
       },
     }),
+    qiankun('x-template',{useDevMode:true})
   ],
   resolve: {
     alias: {

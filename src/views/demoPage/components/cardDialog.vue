@@ -1,10 +1,8 @@
 <template>
   <div>
     <el-button plain @click="dialogVisible = true">{{ btnName }}</el-button>
-    <el-dialog v-model="dialogVisible" title="Tips" width="800" :before-close="handleClose">
-      <div>
-        <gl-form :form-items="formItems" v-model="formData" :showButtons="false"></gl-form>
-      </div>
+    <el-dialog v-model="dialogVisible" title="222" width="800" :before-close="handleClose">
+      <Status />
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -17,8 +15,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
-import GlForm from '@feature/gl-form/index.vue'
-import DeviceGroup from '@bussiness/DeviceGroup/index.vue'
+import Status from './status.vue'
 
 import { ElMessageBox } from 'element-plus'
 const emit = defineEmits(['confirm'])
@@ -32,30 +29,7 @@ const props = defineProps({
     coment: '按钮名称'
   }
 })
-const formData = ref({
-  device: [
-    { device: '', count: '' },
-    { device: '', count: '' }
-  ]
-})
-const formItems: ItemProp[] = [
-  {
-    label: '其他设备',
-    prop: 'device',
-    span: 24,
-    component: DeviceGroup,
-    attrs: {
-      options: [{ label: 'man', value: 'man' }]
-    },
-    linstener: {
-      change(val: any) {
-        // console.log('性别: ', val)
-      }
-    }
-  }
-]
 const onConfirm = () => {
-  console.log('formData', formData.value)
   dialogVisible.value = false
   // emit('confirm')
 }

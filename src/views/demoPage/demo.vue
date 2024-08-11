@@ -51,6 +51,7 @@ import GlForm from '@feature/gl-form/index.vue'
 import DataDict from '@bussiness/DataDict/index.vue'
 import EditTable from '@feature/edit-table/index.vue'
 import SelectDialog from './components/selectDialog.vue'
+import CardDialog from './components/cardDialog.vue'
 
 import { getTableDataApi } from '@/api/common'
 import { useDebounceFn } from '@vueuse/core' // vueuse 工具集
@@ -207,6 +208,18 @@ const formItems: ItemProp[] = [
     component: SelectDialog,
     label: '按钮弹窗',
     attrs: { btnName: '按钮1' },
+    prop: 'btn',
+    span: 6,
+    linstener: {
+      confirm(list: []) {
+        onAddFormItems(list)
+      }
+    }
+  },
+  {
+    component: CardDialog,
+    label: '按钮弹窗2',
+    attrs: { btnName: '按钮2' },
     prop: 'btn',
     span: 6,
     linstener: {
